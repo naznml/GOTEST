@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>География пәні | КТ дайындық</title>
+<title>Географияны оқыту әдістемесі | КТ дайындық</title>
 
 <style>
 :root{
-  --bg:#f5f7fb;
+  --bg:#f6f8fb;
   --card:#ffffff;
   --text:#102033;
   --muted:#64748b;
   --primary:#2563eb;
   --primary2:#0f766e;
+  --purple:#7c3aed;
   --soft:#eaf2ff;
   --soft2:#ecfdf5;
+  --soft3:#f5f3ff;
   --border:#dbe4f0;
   --green:#16a34a;
   --red:#dc2626;
@@ -25,117 +27,294 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  font-family:Inter,Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
   color:var(--text);
-  background:
-    radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 30%),
-    radial-gradient(circle at top right,rgba(15,118,110,.12),transparent 32%),
-    linear-gradient(180deg,#fbfdff 0%,#f5f7fb 100%);
   line-height:1.65;
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.15),transparent 30%),
+    radial-gradient(circle at top right,rgba(15,118,110,.13),transparent 32%),
+    radial-gradient(circle at 50% 0%,rgba(124,58,237,.08),transparent 28%),
+    linear-gradient(180deg,#fbfdff 0%,#f6f8fb 100%);
 }
 button,input{font-family:inherit}
 .app{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:24px 0 70px}
 .topbar{
-  display:flex;justify-content:space-between;align-items:center;gap:14px;
-  padding:15px 18px;background:rgba(255,255,255,.92);
-  border:1px solid var(--border);border-radius:24px;box-shadow:0 12px 35px rgba(15,23,42,.06);
-  backdrop-filter:blur(14px);position:sticky;top:10px;z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:15px 18px;
+  background:rgba(255,255,255,.93);
+  border:1px solid var(--border);
+  border-radius:24px;
+  box-shadow:0 12px 35px rgba(15,23,42,.06);
+  backdrop-filter:blur(14px);
+  position:sticky;
+  top:10px;
+  z-index:50;
 }
 .brand{display:flex;align-items:center;gap:12px}
 .logo{
-  width:44px;height:44px;border-radius:15px;display:grid;place-items:center;
-  background:linear-gradient(135deg,#2563eb,#0f766e);color:white;font-weight:900;
+  width:44px;height:44px;border-radius:15px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#2563eb,#0f766e);
+  color:white;font-weight:950;
+  box-shadow:0 12px 24px rgba(37,99,235,.22);
 }
 .brand b{display:block;font-size:16px;line-height:1.2}
 .brand span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
 .nav button,.back{
-  border:1px solid var(--border);background:#fff;color:var(--text);
-  padding:9px 12px;border-radius:999px;font-size:12px;font-weight:850;cursor:pointer;transition:.18s;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  padding:9px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:850;
+  cursor:pointer;
+  transition:.18s ease;
 }
-.nav button:hover,.back:hover{border-color:rgba(37,99,235,.45);color:var(--primary);transform:translateY(-1px)}
+.nav button:hover,.back:hover{
+  border-color:rgba(37,99,235,.45);
+  color:var(--primary);
+  transform:translateY(-1px);
+}
 .page{display:none;animation:fade .22s ease both}
 .page.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .hero{
-  margin-top:22px;border-radius:32px;padding:44px;overflow:hidden;position:relative;
-  background:linear-gradient(135deg,#0b214f,#2563eb);color:#fff;box-shadow:var(--shadow);
+  margin-top:22px;
+  border-radius:32px;
+  padding:44px;
+  overflow:hidden;
+  position:relative;
+  color:#fff;
+  background:
+    linear-gradient(135deg,rgba(12,33,83,.98),rgba(37,99,235,.93)),
+    linear-gradient(45deg,#0b214f,#2563eb);
+  box-shadow:var(--shadow);
 }
-.hero:before{content:"";position:absolute;right:120px;bottom:-130px;width:280px;height:280px;border-radius:50%;background:rgba(15,118,110,.34)}
-.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12)}
+.hero:before{
+  content:"";
+  position:absolute;
+  right:120px;
+  bottom:-130px;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(15,118,110,.34);
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  right:-80px;top:-80px;
+  width:260px;height:260px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
 .hero>*{position:relative;z-index:1}
 .eyebrow{
-  display:inline-flex;padding:8px 12px;border-radius:999px;
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
-  font-size:13px;font-weight:850;margin-bottom:15px;
+  display:inline-flex;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  font-size:13px;
+  font-weight:850;
+  margin-bottom:15px;
 }
-h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacing:-.04em}
-.hero p{margin:0;max-width:900px;color:rgba(255,255,255,.86);font-size:17px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
-.stat{padding:14px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)}
+h1{
+  margin:0 0 14px;
+  font-size:clamp(30px,5vw,56px);
+  line-height:1.04;
+  letter-spacing:-.04em;
+}
+.hero p{margin:0;max-width:920px;color:rgba(255,255,255,.86);font-size:17px}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:24px;
+}
+.stat{
+  padding:14px;
+  border-radius:18px;
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+}
 .stat b{display:block;font-size:24px;line-height:1}
 .stat span{font-size:13px;color:rgba(255,255,255,.78);font-weight:750}
 .section{margin-top:28px}
 .section h2{font-size:26px;margin:0 0 8px;letter-spacing:-.02em}
-.desc{color:var(--muted);margin:0 0 16px;max-width:850px}
+.desc{color:var(--muted);margin:0 0 16px;max-width:860px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .card{
-  padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:0 14px 35px rgba(15,23,42,.06);cursor:pointer;transition:.2s;min-height:190px;
-  display:flex;flex-direction:column;justify-content:space-between;gap:14px;position:relative;overflow:hidden;
+  padding:24px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 14px 35px rgba(15,23,42,.06);
+  cursor:pointer;
+  transition:.2s;
+  min-height:200px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:14px;
+  position:relative;
+  overflow:hidden;
 }
-.card:after{content:"";position:absolute;right:-44px;top:-44px;width:135px;height:135px;border-radius:50%;background:var(--soft)}
-.card:hover{transform:translateY(-5px);border-color:rgba(37,99,235,.35);box-shadow:0 22px 45px rgba(15,23,42,.1)}
-.num{width:48px;height:48px;border-radius:16px;background:var(--soft);color:var(--primary);display:grid;place-items:center;font-weight:900;position:relative;z-index:1}
+.card:after{
+  content:"";
+  position:absolute;
+  right:-44px;
+  top:-44px;
+  width:135px;height:135px;
+  border-radius:50%;
+  background:var(--soft);
+}
+.card:nth-child(even):after{background:var(--soft2)}
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(37,99,235,.35);
+  box-shadow:0 22px 45px rgba(15,23,42,.1);
+}
+.num{
+  width:48px;height:48px;border-radius:16px;
+  background:var(--soft);
+  color:var(--primary);
+  display:grid;
+  place-items:center;
+  font-weight:950;
+  position:relative;
+  z-index:1;
+}
 .card h3{margin:0;font-size:21px;line-height:1.22;letter-spacing:-.02em;position:relative;z-index:1}
 .card p{margin:9px 0 0;color:var(--muted);font-size:14px;position:relative;z-index:1}
 .tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
-.tag{padding:6px 10px;border-radius:999px;background:#f8fafc;border:1px solid var(--border);color:#475569;font-size:12px;font-weight:800}
-.topic-hero,.content{
-  background:#fff;border:1px solid var(--border);border-radius:26px;box-shadow:var(--shadow);
-  padding:26px;margin-top:22px;
+.tag{
+  padding:6px 10px;
+  border-radius:999px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  color:#475569;
+  font-size:12px;
+  font-weight:800;
 }
-.breadcrumb{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:800;margin-bottom:12px}
-.topic-hero h2{font-size:clamp(26px,4vw,42px);line-height:1.08;margin:0 0 10px;letter-spacing:-.035em}
-.topic-hero p{margin:0;color:#4b5563;max-width:900px}
-.info{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
-.info div{padding:14px;background:#f8fafc;border:1px solid var(--border);border-radius:17px}
+.topic-hero,.content{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:26px;
+  margin-top:22px;
+}
+.breadcrumb{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:12px;
+}
+.topic-hero h2{
+  font-size:clamp(26px,4vw,42px);
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.035em;
+}
+.topic-hero p{margin:0;color:#4b5563;max-width:920px}
+.info{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+.info div{
+  padding:14px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  border-radius:17px;
+}
 .info b{display:block;font-size:14px;margin-bottom:2px}
 .info span{font-size:13px;color:var(--muted);font-weight:650}
 .theory{
-  display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:16px;
+  margin-top:16px;
 }
-.box{padding:18px;border:1px solid var(--border);border-radius:20px;background:#f8fafc}
+.box{
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:#f8fafc;
+}
 .box h3{margin:0 0 8px;font-size:19px}
 .box p,.box li{color:#374151}
 .box ul{margin:8px 0 0;padding-left:20px}
 .test-box{display:grid;gap:14px;margin-top:16px}
 .question{
-  background:#fff;border:1px solid var(--border);border-radius:20px;padding:18px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:18px;
   box-shadow:0 8px 24px rgba(15,23,42,.045);
 }
 .question h4{margin:0 0 13px;font-size:16px;line-height:1.45}
 .options{display:grid;gap:9px}
 .option{
-  display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--border);
-  border-radius:15px;background:#f8fafc;cursor:pointer;transition:.15s;color:#334155;font-weight:650;
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  padding:11px 12px;
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:#f8fafc;
+  cursor:pointer;
+  transition:.15s;
+  color:#334155;
+  font-weight:650;
 }
 .option:hover{background:var(--soft);border-color:rgba(37,99,235,.38)}
 .option input{margin-top:4px;flex:none}
-.explain{display:none;margin-top:12px;padding:12px;border-radius:15px;background:#f8fafc;border:1px solid var(--border);color:#475569;font-size:14px}
+.explain{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:15px;
+  background:#f8fafc;
+  border:1px solid var(--border);
+  color:#475569;
+  font-size:14px;
+}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .check,.reset{
-  border:0;padding:12px 16px;border-radius:16px;font-weight:900;cursor:pointer;
+  border:0;
+  padding:12px 16px;
+  border-radius:16px;
+  font-weight:900;
+  cursor:pointer;
 }
 .check{background:var(--primary);color:#fff}
 .reset{background:#e2e8f0;color:#1f2937}
 .summary{
-  margin-top:14px;padding:14px;border-radius:16px;border:1px solid var(--border);
-  background:#f8fafc;font-weight:850;color:#334155;
+  margin-top:14px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:#f8fafc;
+  font-weight:850;
+  color:#334155;
 }
 .footer{
-  margin-top:34px;padding:18px;border-radius:22px;background:#fff;border:1px solid var(--border);
-  color:var(--muted);font-size:13px;text-align:center;
+  margin-top:34px;
+  padding:18px;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-size:13px;
+  text-align:center;
 }
 @media(max-width:900px){
   .topbar{align-items:flex-start;flex-direction:column}
@@ -154,10 +333,10 @@ h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacin
 <div class="app">
   <header class="topbar">
     <div class="brand">
-      <div class="logo">GEO</div>
+      <div class="logo">ӘД</div>
       <div>
-        <b>География пәні</b>
-        <span>КТ дайындық · 1-сайт</span>
+        <b>Географияны оқыту әдістемесі</b>
+        <span>КТ дайындық · 2-сайт</span>
       </div>
     </div>
     <nav class="nav" id="nav"></nav>
@@ -166,24 +345,28 @@ h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacin
   <main>
     <section class="page active" id="home">
       <div class="hero">
-        <div class="eyebrow">География · Қазақстан · Дүние жүзі · КТ</div>
-        <h1>География пәні бойынша дайындық сайты</h1>
+        <div class="eyebrow">Әдістеме · География · КТ</div>
+        <h1>Географияны оқыту әдістемесі</h1>
         <p>
-          Бұл сайт география пәні бойынша пробный тесттер мен ашық дайындық материалдарындағы
-          негізгі тақырыптарды жүйелеп қайталауға арналған. Сұрақтар КТ форматына жақын,
-          жауаптар тексеріледі, әр сұрақтан кейін қысқа түсіндірме беріледі.
+          Бұл сайт географияны оқыту әдістемесі бойынша ашық пробный тесттердегі
+          негізгі тақырыптарды жүйелеп қайталауға арналған. Сұрақтар КТ форматына
+          жақын: бір немесе бірнеше дұрыс жауап, күрделі distractor-нұсқалар және
+          тексеруден кейін түсіндірме беріледі.
         </p>
         <div class="stats">
           <div class="stat"><b>6</b><span>тақырыптық бөлім</span></div>
-          <div class="stat"><b>60</b><span>сұрақ</span></div>
-          <div class="stat"><b>1/3</b><span>дұрыс жауап форматы</span></div>
-          <div class="stat"><b>КТ</b><span>қорытынды дайындық</span></div>
+          <div class="stat"><b>60</b><span>жаттығу сұрағы</span></div>
+          <div class="stat"><b>30</b><span>финалдық тест</span></div>
+          <div class="stat"><b>A/B/C</b><span>қиындық деңгейі</span></div>
         </div>
       </div>
 
       <section class="section">
         <h2>Бөлімді таңдаңыз</h2>
-        <p class="desc">Әр бөлімде қысқаша қайталау, негізгі фактілер және күрделендірілген тест сұрақтары бар.</p>
+        <p class="desc">
+          Әр бөлімде қысқаша теория, есте сақтайтын фактілер және әдістемелік
+          КТ сұрақтары берілген.
+        </p>
         <div class="grid" id="cards"></div>
       </section>
     </section>
@@ -191,7 +374,8 @@ h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacin
     <div id="pages"></div>
 
     <footer class="footer">
-      © Назерке. Материалды рұқсатсыз көшіруге, сатуға немесе қайта таратуға болмайды.
+      © Назерке. Барлық құқық қорғалған. Материалды рұқсатсыз көшіруге,
+      сатуға, қайта таратуға немесе коммерциялық мақсатта қолдануға болмайды.
     </footer>
   </main>
 </div>
@@ -199,565 +383,930 @@ h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacin
 <script>
 const sections = [
   {
-    id:"cartography",
-    title:"Картография және жалпы географиялық ұғымдар",
-    short:"Карта, масштаб, координата, экватор, меридиан, топографиялық карта.",
+    id:"basic",
+    title:"Әдістеме негіздері және тест құрылымы",
+    short:"Әдістеменің мақсаты, міндеті, пән мазмұны, КТ спецификациясы, жауап форматы.",
     level:"A/B",
     theory:[
-      "Картография бөлімінде карта, масштаб, географиялық координата, топографиялық карта және Жер туралы негізгі ұғымдар қарастырылады.",
-      "Экватор Жерді Солтүстік және Оңтүстік жарты шарларға бөледі. Географиялық координата ендік пен бойлық арқылы анықталады.",
-      "Масштаб картадағы қашықтық пен жер бетіндегі нақты қашықтықтың арақатынасын көрсетеді. Топографиялық карта жергілікті жерді шартты белгілер арқылы дәл әрі жан-жақты бейнелейді."
+      "Географияны оқыту әдістемесі мектеп географиясын оқытудың мақсатын, мазмұнын, әдістерін, құралдарын, сабақ формаларын және оқушының оқу-танымдық әрекетін зерттейді.",
+      "КТ спецификациясында географияны оқыту әдістемесінің негізгі бөлімдері қамтылады: мақсат-міндет, білім мазмұны, оқыту әдістері, құралдар, ұғым қалыптастыру, сабақ, сыныптан тыс жұмыс, ГАЖ, 7–11 сынып әдістемесі, факультатив және өлкетану.",
+      "Тест тапсырмалары жабық формада беріледі: бір немесе бірнеше дұрыс жауапты таңдау қажет. Толық дұрыс жауап жоғары балл береді."
     ],
     facts:[
-      "Экватор — Солтүстік және Оңтүстік жарты шарларды бөлетін сызық.",
-      "Географиялық координата — ендік пен бойлық.",
-      "Ірі масштаб — 1:100 000 масштабқа дейін.",
-      "Орта масштаб — 1:200 000-нан 1:1 000 000-ға дейін.",
-      "Кіші масштаб — 1:1 000 000-нан кіші.",
-      "1 см — 100 м болса, сандық масштаб 1:10 000."
+      "Тест бір нұсқада 20 тапсырмадан тұрады.",
+      "Қиындық деңгейлері: A — жеңіл, B — орташа, C — қиын.",
+      "Тапсырма формасы: бір немесе бірнеше дұрыс жауап.",
+      "Әдістеме география мазмұнын педагогика, дидактика және мектеп тәжірибесімен байланыстырады.",
+      "Оқу мақсаты сабақ мазмұнын, әдісті, тапсырманы және бағалауды бағыттайды."
     ],
     questions:[
       {
-        q:"1. Жерді Солтүстік және Оңтүстік жарты шарларға бөлетін негізгі сызық қайсы?",
-        type:"single",
-        options:["Бастапқы меридиан","Экватор","Тропик сызығы","Поляр шеңбері","180° меридиан"],
-        answer:[1],
-        exp:"Экватор Жерді Солтүстік және Оңтүстік жарты шарларға бөледі."
-      },
-      {
-        q:"2. Географиялық координатаны анықтайтын көрсеткіштерді белгілеңіз.",
-        type:"multi",
-        options:["Географиялық ендік","Масштаб түрі","Географиялық бойлық","Жер бедері биіктігі","Карта проекциясы","Нысанның шартты белгісі"],
-        answer:[0,2],
-        exp:"Географиялық координата ендік пен бойлық арқылы анықталады."
-      },
-      {
-        q:"3. 1 см — 100 м атаулы масштабына сәйкес сандық масштаб қайсы?",
-        type:"single",
-        options:["1:1 000","1:10 000","1:100 000","1:1 000 000","1:100"],
-        answer:[1],
-        exp:"100 м = 10 000 см, сондықтан масштаб 1:10 000 болады."
-      },
-      {
-        q:"4. Орта масштабты картаға сәйкес аралық қайсы?",
-        type:"single",
-        options:["1:100 000 масштабқа дейін","1:200 000-нан 1:1 000 000-ға дейін","1:1 000 000-нан кіші","1:10 000-нан 1:25 000-ға дейін","Тек 1:50 000 масштаб"],
-        answer:[1],
-        exp:"Орта масштаб 1:200 000-нан 1:1 000 000-ға дейінгі карталарды қамтиды."
-      },
-      {
-        q:"5. Топографиялық карта ұғымына сәйкес тұжырым қайсы?",
+        q:"Географияны оқыту әдістемесінің зерттеу нысанына ең жақын тұжырым қайсы?",
         type:"single",
         options:[
-          "Дүние жүзінің саяси бөлінісін ғана көрсететін карта",
-          "Жергілікті жерді шартты белгілермен бірнеше есе кішірейтіп дәл бейнелейтін карта",
-          "Тек климаттық белдеулерді бейнелейтін карта",
-          "Тек мұхит ағыстарын көрсететін карта",
-          "Тек материктердің геологиялық жасын көрсететін карта"
+          "Геологиялық жыныстардың абсолюттік жасын анықтау үдерісі",
+          "Мектептегі географияны оқыту үдерісі және оқушының оқу-танымдық әрекеті",
+          "Атмосфералық құбылыстарды синоптикалық болжау жүйесі",
+          "Пайдалы қазбалардың өндірістік қорын есептеу әдісі",
+          "Табиғи зоналардың биологиялық түр құрамын жіктеу"
         ],
         answer:[1],
-        exp:"Топографиялық карта жергілікті жердің шағын ауданын шартты белгілермен дәл көрсетеді."
+        exp:"Әдістеме мектептегі географияны оқыту үдерісін және оқушы әрекетін қарастырады."
       },
       {
-        q:"6. Дата ауысу сызығы негізінен қай меридиан маңымен өтеді?",
-        type:"single",
-        options:["0° меридиан","30° шығыс бойлық","90° батыс бойлық","180° меридиан","66,5° солтүстік ендік"],
-        answer:[3],
-        exp:"Дата ауысу сызығы негізінен 180° меридиан маңымен өтеді."
-      },
-      {
-        q:"7. Жердің шар тәрізді екенін ескеріп, оның өлшемдерін есептеуге үлес қосқан ежелгі ғалым қайсы?",
-        type:"single",
-        options:["Әл-Фараби","Эратосфен","А.Гумбольдт","Птолемей","Мартин Бехайм"],
-        answer:[1],
-        exp:"Эратосфен Жердің шар тәрізді екенін ескеріп, оның өлшемдерін есептеуге талпынған ғалым ретінде белгілі."
-      },
-      {
-        q:"8. Алғашқы глобусты жасаған ғалым ретінде қай есім беріледі?",
-        type:"single",
-        options:["Мартин Бехайм","Фернан Магеллан","Джеймс Кук","Руаль Амундсен","Христофор Колумб"],
-        answer:[0],
-        exp:"Алғашқы глобусты жасаған ғалым ретінде Мартин Бехайм аталады."
-      },
-      {
-        q:"9. Жер мен Күннің орташа арақашықтығы шамамен қанша?",
-        type:"single",
-        options:["40 млн км","75 млн км","100 млн км","150 млн км","300 млн км"],
-        answer:[3],
-        exp:"Жер мен Күннің арақашықтығы шамамен 150 млн км."
-      },
-      {
-        q:"10. Жер өз білігіне қатысты қандай бұрышпен еңкіш орналасқан?",
-        type:"single",
-        options:["23,5°","45°","66,5°","90°","180°"],
-        answer:[2],
-        exp:"Жер осі орбита жазықтығына қатысты 66,5° бұрышпен еңкіш орналасады."
-      }
-    ]
-  },
-
-  {
-    id:"physical",
-    title:"Физикалық география",
-    short:"Жер қыртысы, атмосфера, ылғалдылық, табиғат зоналары, өзен-көлдер.",
-    level:"B",
-    theory:[
-      "Физикалық география Жердің табиғи қабықтарын, жер бедерін, климатты, өзен-көлдерді, табиғат зоналарын және табиғи кешендерді зерттейді.",
-      "Жер қыртысы, мантия, ядро, атмосфера, гидросфера, биосфера сияқты ұғымдар географиялық қабықты түсінудің негізін құрайды.",
-      "Температура биіктеген сайын төмендейді: 100 м сайын шамамен 0,6°C, 1000 м сайын 6°C."
-    ],
-    facts:[
-      "Ядро құрамында темір мен никель болады.",
-      "Ядро радиусы шамамен 3500 км.",
-      "Температура 1000 м биіктікке көтерілген сайын 6°C төмендейді.",
-      "Ауадағы су буының нақты мөлшері абсолюттік ылғалдық деп аталады.",
-      "Жауын-шашын мен буланушылық қатынасы — ылғалдану коэффициенті.",
-      "Географиялық қабық атмосфера, гидросфера, биосфера және литосфера байланысынан қалыптасады."
-    ],
-    questions:[
-      {
-        q:"1. Жер ядросының негізгі құрамын көрсетіңіз.",
-        type:"single",
-        options:["Кальций мен магний","Темір мен никель","Кремний мен алюминий","Көміртек пен сутек","Натрий мен хлор"],
-        answer:[1],
-        exp:"Жер ядросының негізгі құрамында темір мен никель басым."
-      },
-      {
-        q:"2. Жер ядросының радиусы шамамен қанша?",
-        type:"single",
-        options:["700 км","1500 км","2900 км","3500 км","6371 км"],
-        answer:[3],
-        exp:"Файлдағы мәлімет бойынша ядро радиусы шамамен 3500 км."
-      },
-      {
-        q:"3. Егер тау етегінде ауа температурасы +18°C болса, 5000 м биіктікте температура шамамен қанша болады?",
-        type:"single",
-        options:["0°C","+6°C","-6°C","-12°C","-18°C"],
-        answer:[3],
-        exp:"1000 м сайын 6°C төмендейді: 5×6=30; 18−30=-12°C."
-      },
-      {
-        q:"4. Абсолюттік ылғалдық нені білдіреді?",
-        type:"single",
+        q:"Географияны оқыту әдістемесінің негізгі міндеттерін белгілеңіз.",
+        type:"multi",
         options:[
-          "Ауадағы су буының нақты мөлшерін",
-          "Жауын-шашынның жылдық жиынтығын",
-          "Буланушылық пен жауын-шашын қатынасын",
-          "Ауа қысымының тәуліктік өзгерісін",
-          "Жел жылдамдығының шкаласын"
+          "Оқу мазмұнын мақсат пен оқушы деңгейіне сай іріктеу",
+          "Оқыту әдістері мен құралдарын нәтижеге сай таңдау",
+          "Оқушының оқу-танымдық әрекетін ұйымдастыру",
+          "Кен қабаттарының өндірістік қорын есептеу",
+          "Синоптикалық картамен ауа райын болжау",
+          "Геологиялық барлау маршрутын жобалау"
         ],
-        answer:[0],
-        exp:"Абсолюттік ылғалдық — 1 м³ ауадағы су буының нақты мөлшері."
-      },
-      {
-        q:"5. Ылғалдану коэффициенті қандай көрсеткіштердің қатынасымен анықталады?",
-        type:"single",
-        options:["Температура мен қысым","Жауын-шашын мен буланушылық","Ендік пен бойлық","Жел мен бұлттылық","Ағыс пен тұздылық"],
-        answer:[1],
-        exp:"Ылғалдану коэффициенті жауын-шашынның буланушылыққа қатынасы арқылы анықталады."
-      },
-      {
-        q:"6. Географиялық қабықты түзетін негізгі қабықтарды белгілеңіз.",
-        type:"multi",
-        options:["Атмосфера","Гидросфера","Биосфера","Литосфера","Ионосфера","Магнитосфера"],
-        answer:[0,1,2,3],
-        exp:"Географиялық қабық атмосфера, гидросфера, биосфера және литосфераның өзара байланысынан түзіледі."
-      },
-      {
-        q:"7. Жер бедерінің өзгеруіне әсер ететін күштер қайсы?",
-        type:"single",
-        options:["Тек күн радиациясы","Тек мұхит ағыстары","Ішкі және сыртқы күштер","Тек атмосфералық қысым","Тек өсімдік жамылғысы"],
-        answer:[2],
-        exp:"Жер бедері эндогендік және экзогендік, яғни ішкі және сыртқы күштердің әсерінен өзгереді."
-      },
-      {
-        q:"8. Судың тереңдігін өлшейтін құрал қайсы?",
-        type:"single",
-        options:["Барометр","Эхолот","Анемометр","Гигрометр","Компас"],
-        answer:[1],
-        exp:"Судың тереңдігін өлшейтін құрал — эхолот."
-      },
-      {
-        q:"9. Ауа қысымын өлшейтін құралды белгілеңіз.",
-        type:"single",
-        options:["Эхолот","Барометр","Термометр","Флюгер","Сейсмограф"],
-        answer:[1],
-        exp:"Ауа қысымын барометр өлшейді."
-      },
-      {
-        q:"10. Экватор мен тропик арасындағы өтпелі климаттық белдеу қайсы?",
-        type:"single",
-        options:["Экваторлық","Субэкваторлық","Тропиктік","Субтропиктік","Қоңыржай"],
-        answer:[1],
-        exp:"Экватор мен тропик арасындағы өтпелі белдеу — субэкваторлық белдеу."
-      }
-    ]
-  },
-
-  {
-    id:"kazakhstan",
-    title:"Қазақстан географиясы",
-    short:"Қазақстан аумағы, қорықтар, өзендер, табиғи аймақтар, өнеркәсіп.",
-    level:"B/C",
-    theory:[
-      "Қазақстан географиясында аумақ, табиғи аймақтар, өзен-көлдер, пайдалы қазбалар, экономикалық аудандар және өнеркәсіп орталықтары маңызды орын алады.",
-      "Қазақстанның жер көлемі 2724,9 мың км². Ел аумағы табиғи-климаттық айырмашылықтарға, ресурстық базаға және экономикалық мамандануға қарай ерекшеленеді.",
-      "Қорықтар мен ұлттық парктер табиғи кешендерді, сирек жануарлар мен өсімдіктерді қорғау үшін құрылады."
-    ],
-    facts:[
-      "Қазақстан жер көлемі — 2724,9 мың км².",
-      "Қазақстан жер көлемі бойынша дүниежүзінде 9-орын алады.",
-      "Сырдария Тұран ойпатын кесіп өтеді.",
-      "Нұра өзені қар суымен қоректенеді.",
-      "Дала зонасында Наурызым және Қорғалжын қорықтары орналасқан.",
-      "Үстірт қорығы қабылан мен құланды қорғаумен байланысты."
-    ],
-    questions:[
-      {
-        q:"1. Қазақстанның жер көлемі бойынша дұрыс көрсеткіш қайсы?",
-        type:"single",
-        options:["1724,9 мың км²","2224,9 мың км²","2724,9 мың км²","3724,9 мың км²","4724,9 мың км²"],
-        answer:[2],
-        exp:"Қазақстанның жер көлемі — 2724,9 мың км²."
-      },
-      {
-        q:"2. Қазақстан жер көлемі жөнінен дүниежүзінде нешінші орын алады?",
-        type:"single",
-        options:["5-орын","6-орын","7-орын","8-орын","9-орын"],
-        answer:[4],
-        exp:"Файлда Қазақстан жер көлемі жөнінен 9-орында деп берілген."
-      },
-      {
-        q:"3. Тұран ойпатын кесіп өтетін өзен қайсы?",
-        type:"single",
-        options:["Ертіс","Сырдария","Жайық","Есіл","Тобыл"],
-        answer:[1],
-        exp:"Сырдария өзені Тұран ойпатын кесіп өтеді."
-      },
-      {
-        q:"4. Нұра өзенінің қоректену типі қайсы?",
-        type:"single",
-        options:["Мұздық","Жаңбыр","Қар","Жерасты суы","Аралас мұхиттық"],
-        answer:[2],
-        exp:"Файлдағы мәлімет бойынша Нұра өзені қар суымен қоректенеді."
-      },
-      {
-        q:"5. Дала зонасында орналасқан қорықтарды белгілеңіз.",
-        type:"multi",
-        options:["Наурызым","Қорғалжын","Ақсу-Жабағылы","Үстірт","Марқакөл","Барсакелмес"],
-        answer:[0,1],
-        exp:"Дала зонасында Наурызым және Қорғалжын қорықтары орналасқан."
-      },
-      {
-        q:"6. Қабылан мен құланды қорғау мақсатымен байланысты қорық қайсы?",
-        type:"single",
-        options:["Наурызым","Үстірт","Марқакөл","Қорғалжын","Батыс Алтай"],
-        answer:[1],
-        exp:"Үстірт қорығы қабылан мен құланды қорғаумен байланысты."
-      },
-      {
-        q:"7. Алтай тауындағы қорықтар жұбы қайсы?",
-        type:"single",
-        options:["Наурызым және Қорғалжын","Марқакөл және Батыс Алтай","Ақсу-Жабағылы және Барсакелмес","Үстірт және Алакөл","Қарқаралы және Алтынемел"],
-        answer:[1],
-        exp:"Алтай тауы аумағындағы қорықтар ретінде Марқакөл және Батыс Алтай беріледі."
-      },
-      {
-        q:"8. Қорқыт ата ескерткіші орналасқан қала қайсы?",
-        type:"single",
-        options:["Түркістан","Қызылорда","Тараз","Ақтөбе","Павлодар"],
-        answer:[1],
-        exp:"Файлда Қорқыт ата ескерткіші Қызылордамен байланысты берілген."
-      },
-      {
-        q:"9. Шайтанкөл орналасқан ұлттық парк қайсы?",
-        type:"single",
-        options:["Қарқаралы","Алтынемел","Іле Алатауы","Баянауыл","Көкшетау"],
-        answer:[0],
-        exp:"Шайтанкөл Қарқаралы ұлттық паркімен байланысты."
-      },
-      {
-        q:"10. Асбест кен орны ретінде қайсы көрсетілген?",
-        type:"single",
-        options:["Жітіқара","Жезқазған","Қоңырат","Бозшакөл","Жаңатас"],
-        answer:[0],
-        exp:"Файлда асбест кен орны ретінде Жітіқара берілген."
-      }
-    ]
-  },
-
-  {
-    id:"world",
-    title:"Дүние жүзі географиясы",
-    short:"Материктер, мұхиттар, бұғаздар, таулар, көлдер, табиғат зоналары.",
-    level:"B/C",
-    theory:[
-      "Дүние жүзі географиясында материктер мен мұхиттар, бұғаздар, таулар, өзендер, көлдер, табиғат зоналары және аймақтық ерекшеліктер қарастырылады.",
-      "Кейбір фактілер КТ сұрақтарында жиі кездеседі: Ла-Манш бұғазы, Сейкан тунелі, Пиай мүйісі, Амазонка сельвасы, Солтүстік Американың Ұлы көлдері.",
-      "Материктік және аймақтық нысандарды шатастырмау үшін әр нысанның орналасуы мен ерекшелігін бірге есте сақтау қажет."
-    ],
-    facts:[
-      "Кеме қатынасы ең көп бұғаздардың бірі — Ла-Манш.",
-      "Хонсю мен Хоккайдо аралдарын Сейкан тунелі байланыстырады.",
-      "Еуразияның оңтүстік шеткі нүктесі — Пиай.",
-      "Оңтүстік Америкадағы қалың экваторлық орман — сельва.",
-      "Солтүстік Американың Солтүстік Мұзды мұхит алабына жататын өзені — Маккензи.",
-      "Дүние жүзіндегі ең үлкен каньон Колорадо өзені бойында орналасқан."
-    ],
-    questions:[
-      {
-        q:"1. Кеме қатынасы ең көп бұғаздардың бірі ретінде қай бұғаз көрсетілген?",
-        type:"single",
-        options:["Ормуз","Ла-Манш","Босфор","Гибралтар","Зонд"],
-        answer:[1],
-        exp:"Файлда тәулігіне көп кеме өтетін бұғаз ретінде Ла-Манш берілген."
-      },
-      {
-        q:"2. Хонсю мен Хоккайдо аралдарын байланыстыратын тунель қайсы?",
-        type:"single",
-        options:["Евротуннель","Сейкан","Готард","Лердаль","Монблан"],
-        answer:[1],
-        exp:"Жапониядағы Хонсю мен Хоккайдоны Сейкан тунелі байланыстырады."
-      },
-      {
-        q:"3. Еуразия материгінің оңтүстік шеткі нүктесі қайсы?",
-        type:"single",
-        options:["Челюскин","Пиай","Рока","Дежнев","Игльный"],
-        answer:[1],
-        exp:"Еуразияның оңтүстік шеткі нүктесі — Пиай."
-      },
-      {
-        q:"4. Оңтүстік Америкадағы ит тұмсығы батпайтын қалың орман қалай аталады?",
-        type:"single",
-        options:["Тайга","Сельва","Кампос","Пампа","Прерия"],
-        answer:[1],
-        exp:"Оңтүстік Америкадағы қалың экваторлық орман — сельва."
-      },
-      {
-        q:"5. Бразилия саваннасы қалай аталады?",
-        type:"single",
-        options:["Пампа","Кампос","Сельва","Льянос","Прерия"],
-        answer:[1],
-        exp:"Бразилия саваннасы — кампос."
-      },
-      {
-        q:"6. Солтүстік Американың Солтүстік Мұзды мұхит алабына жататын өзені қайсы?",
-        type:"single",
-        options:["Миссисипи","Колорадо","Маккензи","Юкон","Ниагара"],
-        answer:[2],
-        exp:"Маккензи өзені Солтүстік Мұзды мұхит алабына жатады."
-      },
-      {
-        q:"7. Солтүстік Американың Ұлы көлдерін белгілеңіз.",
-        type:"multi",
-        options:["Жоғарғы","Мичиган","Гурон","Эри","Онтарио","Виктория"],
-        answer:[0,1,2,3,4],
-        exp:"Ұлы көлдерге Жоғарғы, Мичиган, Гурон, Эри және Онтарио жатады."
-      },
-      {
-        q:"8. Дүние жүзіндегі ең үлкен каньон қай өзен бойында орналасқан?",
-        type:"single",
-        options:["Маккензи","Колорадо","Миссисипи","Амазонка","Ориноко"],
-        answer:[1],
-        exp:"Үлкен каньон Колорадо өзені бойында орналасқан."
-      },
-      {
-        q:"9. Африканың ең биік нүктесі қайсы?",
-        type:"single",
-        options:["Кения","Килиманджаро","Атлас","Рувензори","Тугела"],
-        answer:[1],
-        exp:"Африканың ең биік нүктесі — Килиманджаро."
-      },
-      {
-        q:"10. Африканың көлемі ең үлкен көлі қайсы?",
-        type:"single",
-        options:["Танганьика","Ньяса","Виктория","Чад","Тана"],
-        answer:[2],
-        exp:"Африканың көлемі ең үлкен көлі — Виктория."
-      }
-    ]
-  },
-
-  {
-    id:"economy",
-    title:"Экономикалық география және ресурстар",
-    short:"Өнеркәсіп, отын, пайдалы қазбалар, елдердің мамандануы.",
-    level:"C",
-    theory:[
-      "Экономикалық география елдер мен аймақтардың шаруашылығын, ресурстарын, өнеркәсіп орталықтарын және халықаралық мамандануын зерттейді.",
-      "КТ сұрақтарында көмір, мұнай, газ, металлургия, химия өнеркәсібі, машина жасау, ауыл шаруашылығы және халықаралық ұйымдар жиі кездеседі.",
-      "Елдердің мамандануын есте сақтағанда нақты өнім, қала немесе аймақпен бірге жаттау тиімді."
-    ],
-    facts:[
-      "Норвегия СЭС энергиясын кең пайдаланатын ел ретінде беріледі.",
-      "Дүние жүзіндегі көмір экспорттаушы елдер: Аустралия, Канада, Колумбия, ОАР.",
-      "Мұнай бағасын реттеумен байланысты ұйым — ОПЕК.",
-      "Жан басына шаққанда мұнай өндіруден алдыңғы ел ретінде Кувейт берілген.",
-      "Кореяның негізгі маманданған салаларының бірі — кеме жасау.",
-      "АҚШ-тың мұнай-химия астанасы — Хьюстон."
-    ],
-    questions:[
-      {
-        q:"1. СЭС энергиясын кең пайдаланатын ел ретінде қайсы көрсетілген?",
-        type:"single",
-        options:["Норвегия","Италия","Египет","Кувейт","Бразилия"],
-        answer:[0],
-        exp:"Файлда энергияға СЭС пайдаланатын ел ретінде Норвегия берілген."
-      },
-      {
-        q:"2. Дүние жүзіндегі көмір экспорттаушы елдерді белгілеңіз.",
-        type:"multi",
-        options:["Аустралия","Канада","Колумбия","ОАР","Италия","Испания"],
-        answer:[0,1,2,3],
-        exp:"Көмір экспорттаушы елдер ретінде Аустралия, Канада, Колумбия және ОАР берілген."
-      },
-      {
-        q:"3. Мұнай бағасын реттеумен байланысты халықаралық ұйым қайсы?",
-        type:"single",
-        options:["БҰҰ","ЮНЕСКО","ОПЕК","ЕО","ТМД"],
-        answer:[2],
-        exp:"Мұнай бағасы мен мұнай экспорттаушы елдер ұйымы ОПЕК-пен байланысты."
-      },
-      {
-        q:"4. Жан басына шаққанда мұнай өндіруден алдыңғы ел ретінде қай ел көрсетілген?",
-        type:"single",
-        options:["Сауд Арабиясы","Кувейт","Канада","Ресей","Иран"],
-        answer:[1],
-        exp:"Файлда жан басына шаққанда мұнай өндіруден Кувейт алдыңғы ел ретінде берілген."
-      },
-      {
-        q:"5. Кореяның негізгі маманданған саласы қайсы?",
-        type:"single",
-        options:["Кеме жасау","Мақта шаруашылығы","Құрма экспорты","Фосфорит өндіру","Жүн өндірісі"],
-        answer:[0],
-        exp:"Кореяның негізгі маманданған саласы ретінде кеме жасау көрсетілген."
-      },
-      {
-        q:"6. АҚШ-тың мұнай-химия астанасы қай қала?",
-        type:"single",
-        options:["Детройт","Лос-Анджелес","Хьюстон","Чикаго","Сиэтл"],
-        answer:[2],
-        exp:"АҚШ-тың мұнай-химия астанасы — Хьюстон."
-      },
-      {
-        q:"7. АҚШ-тың «автокөліктер астанасы» қай қала?",
-        type:"single",
-        options:["Детройт","Нью-Йорк","Бостон","Сан-Франциско","Атланта"],
-        answer:[0],
-        exp:"Детройт АҚШ-тың автокөлік өнеркәсібімен байланысты."
-      },
-      {
-        q:"8. АҚШ-тың жеміс-жидек себеті ретінде қай аймақ берілген?",
-        type:"single",
-        options:["Техас","Калифорния","Аляска","Флорида","Мичиган"],
-        answer:[1],
-        exp:"Калифорния АҚШ-тың жеміс-жидек себеті ретінде беріледі."
-      },
-      {
-        q:"9. Украинадағы кеме жасау орталықтарын белгілеңіз.",
-        type:"multi",
-        options:["Херсон","Керчь","Николаев","Киев","Харьков","Львов"],
         answer:[0,1,2],
-        exp:"Файлда Украина кеме жасау орталықтары ретінде Херсон, Керчь, Николаев берілген."
+        exp:"Әдістеме мазмұн, әдіс-құрал, оқушы әрекеті және бағалау жүйесін ұйымдастырумен байланысты."
       },
       {
-        q:"10. Сағат өндірісіне қажетті дәл станок жасауға маманданған ел қайсы?",
+        q:"КТ спецификациясы бойынша тест тапсырмалары қандай формада ұсынылады?",
         type:"single",
-        options:["Швейцария","Италия","Франция","Канада","Норвегия"],
+        options:[
+          "Ашық эссе және толық жазбаша дәлелдеу түрінде",
+          "Тек ауызша жауап берілетін сұхбат түрінде",
+          "Берілген жауап нұсқаларынан бір немесе бірнеше дұрыс жауап таңдау түрінде",
+          "Тек сәйкестендіру кестесі түрінде",
+          "Тек практикалық карта сызу түрінде"
+        ],
+        answer:[2],
+        exp:"Спецификацияда тапсырмалар жабық формада, бір немесе бірнеше дұрыс жауапты таңдауды қажет ететіні көрсетіледі."
+      },
+      {
+        q:"Географияны оқыту әдістемесі пәнінің мазмұнына кіретін бөлімдерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Географияны оқыту әдістері және жаңа технологиялары",
+          "География сабағы және сыныптан тыс жұмыстар",
+          "Геоинформатика және ГАЖ технологиялары",
+          "Жер қойнауын өнеркәсіптік бұрғылау әдістері",
+          "Мұнай бағасын халықаралық нарықта болжау",
+          "Минералдардың химиялық құрамын зертханалық талдау"
+        ],
+        answer:[0,1,2],
+        exp:"Спецификацияда оқыту әдістері, сабақ, сыныптан тыс жұмыс және ГАЖ бөлімдері бар."
+      },
+      {
+        q:"Әдістемелік тұрғыдан оқу мақсатының қызметі қайсы?",
+        type:"single",
+        options:[
+          "Сабақтағы әрекеттерді, тапсырманы, әдісті және бағалауды нәтижеге бағыттау",
+          "Оқушы жұмысын бағалау критерийінен ажырату",
+          "Картамен және дерекпен жұмыс істеуді сабақтан шығару",
+          "Сабақ мазмұнын тек мұғалімнің баяндауымен шектеу",
+          "Оқулық мәтінін өзгеріссіз көшіртуді негізгі нәтиже ету"
+        ],
         answer:[0],
-        exp:"Дәл станок жасау және сағат өндірісімен Швейцария байланыстырылады."
+        exp:"Оқу мақсаты сабақтың мазмұны, әдісі, тапсырмасы және бағалау бағытын анықтайды."
+      },
+      {
+        q:"Географияны оқыту әдістемесінде пән мазмұнын меңгеруге, ойлауға және негізгі ұғымдармен жұмыс істеуге көмектесетін құрал ретінде қайсы беріледі?",
+        type:"single",
+        options:[
+          "Ғылыми стиль",
+          "Зерттеу нысаны",
+          "Мазмұнның өзектілігі",
+          "Ғылыми тіл",
+          "Зерттеу пәні"
+        ],
+        answer:[3],
+        exp:"Пробный тестте бұл қызмет ғылыми тілмен байланыстырылған."
+      },
+      {
+        q:"Әдістемелік жүйеде “зерттеу пәні” қай тұжырымға жақын?",
+        type:"single",
+        options:[
+          "Географияны оқытудың мазмұны, әдістері, құралдары және нәтижеге жету жолдары",
+          "Жер бедерінің пайда болу тарихы мен геологиялық құрылымы",
+          "Климаттық белдеулердің таралуы мен ауа массаларының қозғалысы",
+          "Халық санының табиғи өсімі мен көші-қон динамикасы",
+          "Пайдалы қазбалардың геологиялық қоры мен өндірістік бағасы"
+        ],
+        answer:[0],
+        exp:"Зерттеу пәні оқыту мазмұны, әдістері, құралдары және нәтижеге жету жолдарын қамтиды."
+      },
+      {
+        q:"КТ құрылымында қиындық деңгейлері қалай бөлінеді?",
+        type:"single",
+        options:[
+          "A — қиын, B — жеңіл, C — орташа",
+          "A — жеңіл, B — орташа, C — қиын",
+          "A — теориялық, B — практикалық, C — шығармашылық",
+          "A — карталық, B — терминдік, C — мәтіндік",
+          "A — ашық, B — жабық, C — аралас"
+        ],
+        answer:[1],
+        exp:"Спецификацияда A — жеңіл, B — орташа, C — қиын деңгейлер ретінде берілген."
+      },
+      {
+        q:"Географиялық білім мазмұны әдістемелік тұрғыдан нені қамтиды?",
+        type:"single",
+        options:[
+          "Географиялық ұғымдар, заңдылықтар, деректер, білік, дағды және құзыреттер жүйесін",
+          "Сынып кабинетін безендіру тәртібі мен құралдарды сақтау ережесін",
+          "Мектеп дәлізіндегі жалпы ақпараттық хабарландыруларды",
+          "Оқушының пәнге қатысы жоқ жеке қызығушылықтарын",
+          "Мұғалімнің әкімшілік құжаттарын және сыртқы есептерін"
+        ],
+        answer:[0],
+        exp:"Географиялық білім мазмұны ұғым, заңдылық, дерек, дағды және құзыреттер жүйесінен тұрады."
+      },
+      {
+        q:"Әдістеменің КТ мазмұнында 7–11 сынып географиясын оқыту әдістемесінің берілу себебі қайсы?",
+        type:"single",
+        options:[
+          "Әр сыныптағы география мазмұны мен оқушы жас ерекшелігіне сай оқыту жолдарын тексеру үшін",
+          "Тек мектеп оқулықтарының мұқабасын салыстыру үшін",
+          "Сыныптан тыс жұмысты сабақ мазмұнынан ажырату үшін",
+          "Геологиялық зерттеу әдістерін университет деңгейінде тексеру үшін",
+          "Пайдалы қазба өндірісінің экономикалық тиімділігін есептеу үшін"
+        ],
+        answer:[0],
+        exp:"7–11 сынып әдістемесі әр жас кезеңіндегі мазмұн, әдіс және оқу әрекетінің ерекшелігін қамтиды."
       }
     ]
   },
-
   {
-    id:"explorers",
-    title:"Саяхатшылар, ашылулар және елдер",
-    short:"Магеллан, Колумб, Кук, Амундсен, Скотт, ел астаналары және ұйымдар.",
+    id:"methods",
+    title:"Оқыту әдістері және жаңа технологиялар",
+    short:"Репродуктивтік, проблемалық, эвристикалық, ізденушілік, Гальперин, сын тұрғысынан ойлау, инновация.",
     level:"B/C",
     theory:[
-      "Бұл бөлімде географиялық ашылулар, саяхатшылар, халықаралық ұйымдар, елдердің астаналары және тарихи-географиялық фактілер қарастырылады.",
-      "КТ сұрақтарында жылдар мен есімдерді шатастырмау маңызды: Колумб — 1492, Магеллан экспедициясы — 1519–1522, БҰҰ — 1945, Қазақстан БҰҰ-ға 1992 жылы кірді.",
-      "Поляр зерттеушілер бойынша Амундсен мен Скотт, ал Австралия және Жаңа Зеландия бойынша Джеймс Кук жиі сұралады."
+      "Географияны оқыту әдістері оқушының оқу мақсатына жетуі үшін мұғалім мен оқушының бірлескен әрекеттерін ұйымдастырады.",
+      "Оқу-танымдық қызметті ұйымдастыруда репродуктивтік, проблемалық, эвристикалық және ізденушілік әдістер маңызды.",
+      "Жаңа технологиялар ішінде П.Гальпериннің білімді кезеңдеп қалыптастыру технологиясы, сын тұрғысынан ойлау кезеңдері және инновация түрлері жиі сұралады."
     ],
     facts:[
-      "Христофор Колумб саяхаты — 1492 жыл.",
-      "Ф.Магеллан экспедициясы жер шарын 1519–1522 жылдары айналып өтті.",
-      "Оңтүстік полюске Норвегия экспедициясын Р.Амундсен басқарды.",
-      "Оңтүстік полюске ағылшын экспедициясын Р.Скотт басқарды.",
-      "БҰҰ 1945 жылы құрылды.",
-      "Қазақстан БҰҰ-на 1992 жылы 2 наурызда кірді."
+      "П.Гальперин технологиясы — білімді кезеңдеп қалыптастыру.",
+      "Сын тұрғысынан ойлау кезеңдері: қызығушылықты ояту, мағынаны тану, ой-толғаныс.",
+      "Жалпы инновация түрлері: радикалдық, комбинаторлық, модификациялық.",
+      "Жалпы түсініктерді қалыптастыру жолдары: индуктивті және дедуктивті.",
+      "Проблемалық жағдаят — шынайы өмірдегі факторлардың белгілі бір үйлесімі."
     ],
     questions:[
       {
-        q:"1. Христофор Колумбтың Америкаға байланысты әйгілі саяхаты қай жылы басталды?",
+        q:"П.Гальперин ұсынған оқыту технологиясы қайсы?",
         type:"single",
-        options:["1415","1492","1519","1522","1607"],
-        answer:[1],
-        exp:"Колумбтың саяхаты 1492 жылмен байланысты."
+        options:[
+          "Интерактивті оқыту әдістері",
+          "Ақпараттық-коммуникациялық технология",
+          "Сыни ойлау технологиясы",
+          "Критериалды бағалау",
+          "Білімді кезеңдеп қалыптастыру"
+        ],
+        answer:[4],
+        exp:"П.Гальперин технологиясы білімді кезеңдеп қалыптастырумен байланысты."
       },
       {
-        q:"2. Ф.Магеллан экспедициясының жер шарын айналып шығу жылдары қайсы?",
-        type:"single",
-        options:["1492–1498","1519–1522","1600–1603","1728–1730","1911–1912"],
-        answer:[1],
-        exp:"Магеллан экспедициясы 1519–1522 жылдары жер шарын айналып өтті."
+        q:"«Сын тұрғысынан ойлауды дамыту» технологиясының кезеңдерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Қызығушылықты ояту",
+          "Мағынаны тану",
+          "Ой-толғаныс",
+          "Саралап оқыту",
+          "Деңгейлік бақылау",
+          "Модификациялық жаңарту"
+        ],
+        answer:[0,1,2],
+        exp:"Сын тұрғысынан ойлау үш кезеңнен тұрады: қызығушылықты ояту, мағынаны тану, ой-толғаныс."
       },
       {
-        q:"3. Магеллан қайтыс болған соң экспедицияны кім басқарды?",
+        q:"Оқытудағы жалпы инновация түрлерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Радикалдық",
+          "Комбинаторлық",
+          "Модификациялық",
+          "Көркемдік",
+          "Деңгейлеп",
+          "Мәселелік"
+        ],
+        answer:[0,1,2],
+        exp:"Пробный материалда жалпы инновация түрлері ретінде радикалдық, комбинаторлық және модификациялық берілген."
+      },
+      {
+        q:"География сабақтарында жалпы түсініктерді қалыптастырудың негізгі жолдары қайсы?",
+        type:"multi",
+        options:[
+          "Индуктивті",
+          "Дедуктивті",
+          "Эмпирикалық",
+          "Дидактика",
+          "Әдістеме",
+          "Теориялық бақылау"
+        ],
+        answer:[0,1],
+        exp:"Жалпы түсініктер индуктивті және дедуктивті жолдармен қалыптастырылады."
+      },
+      {
+        q:"Шынайы өмірдегі факторлардың белгілі бір үйлесімін білдіретін жағдаят қалай аталады?",
         type:"single",
-        options:["Себастьян Элькано","Джеймс Кук","Роберт Скотт","Руаль Амундсен","Джон Кабот"],
+        options:[
+          "Бағалау жағдаяты",
+          "Иллюстрациялы жағдаят",
+          "Синтездеу жағдаяты",
+          "Талдау жағдаяты",
+          "Проблемалық жағдаят"
+        ],
+        answer:[4],
+        exp:"Проблемалық жағдаят нақты өмір факторларының белгілі бір үйлесімінен туындайды."
+      },
+      {
+        q:"Оқу-танымдық қызметті ұйымдастыру әдістерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Репродуктивтік",
+          "Проблемалық",
+          "Эвристикалық",
+          "Ізденушілік",
+          "Бағалау парағы",
+          "Жаңа білім алу нәтижесі"
+        ],
+        answer:[0,1,2,3],
+        exp:"Оқу-танымдық қызметті ұйымдастыруда репродуктивтік, проблемалық, эвристикалық және ізденушілік әдістер қолданылады."
+      },
+      {
+        q:"Жүйелік-құрылымдық әдістің географияны оқытудағы қолдану сипаты қайсы?",
+        type:"single",
+        options:[
+          "Зерттелетін пәнді жалпы жүйе ретінде қарастыру және құрылымдық байланыстарды ашу",
+          "Оқушының пәнге қатысы жоқ жеке қызығушылығын өлшеу",
+          "Мұғалім қабілетін төмендетуге бағытталған бақылау",
+          "Картадағы шартты белгілерді жаттаумен шектелу",
+          "Тек ойын іс-әрекетін ұйымдастыру"
+        ],
         answer:[0],
-        exp:"Файлда Магелланнан кейін экспедицияны Себастьян Элькано басқарғаны берілген."
+        exp:"Жүйелік-құрылымдық әдіс пәнді тұтас жүйе ретінде және оның ішкі байланыстарымен қарастырады."
       },
       {
-        q:"4. Оңтүстік полюске Норвегия экспедициясын басқарған зерттеуші қайсы?",
-        type:"single",
-        options:["Роберт Скотт","Руаль Амундсен","Джеймс Кук","Фернан Магеллан","А.Гумбольдт"],
-        answer:[1],
-        exp:"Оңтүстік полюске Норвегия экспедициясын Руаль Амундсен басқарды."
+        q:"Рөлдік ойындардың негізгі белгілерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Дұрыс шешім қабылдай білу және қабылданған шешімге жауапты болу",
+          "Нақты қабылданған ереженің болуы",
+          "Қатысушылардың өзара әрекеттесуі және пікірталас өткізуі",
+          "Авторитарлы қарым-қатынас стилі",
+          "Педагогикалық эксперимент жүргізу",
+          "Карта проекциясын математикалық есептеу"
+        ],
+        answer:[0,1,2],
+        exp:"Рөлдік ойын шешім қабылдау, ереже және қатысушылардың өзара әрекеттесуіне сүйенеді."
       },
       {
-        q:"5. Оңтүстік полюске ағылшын экспедициясын басқарған зерттеуші қайсы?",
+        q:"Ойын сабақ түрлерінің білім жүйесінің қалыптасуына ықпалын белгілеңіз.",
+        type:"multi",
+        options:[
+          "Түсініктерін қалыптастыру",
+          "Дағдыларын қалыптастыру",
+          "Шығармашылық дағдыларын қалыптастыру",
+          "Өзіндік жұмыс жүргізуді қолдау",
+          "Геологиялық барлау жүргізу",
+          "Карта масштабының түрін ауыстыру"
+        ],
+        answer:[0,1,2,3],
+        exp:"Ойын сабақтары түсінік, дағды, шығармашылық және өзіндік жұмыс дағдыларына ықпал етеді."
+      },
+      {
+        q:"Жеке тұлғаға бағытталған оқытудың негізгі бағыттарын белгілеңіз.",
+        type:"multi",
+        options:[
+          "Жекелей",
+          "Саралау",
+          "Деңгейлік",
+          "Модульдік",
+          "Типтік",
+          "Модификациялық"
+        ],
+        answer:[0,1,2,3],
+        exp:"Жеке тұлғаға бағытталған оқытуда жекелей, саралау, деңгейлік және модульдік бағыттар маңызды."
+      }
+    ]
+  },
+  {
+    id:"tools",
+    title:"Оқыту құралдары, көрнекілік және ГАЖ",
+    short:"Техникалық құралдар, графикалық көрнекіліктер, мультимедиа, ГАЖ, сандық карта.",
+    level:"A/C",
+    theory:[
+      "Географияны оқыту құралдары оқушының кеңістіктік ойлауын, картамен жұмысын, дерек талдауын және географиялық ұғымды нақты түсінуін қамтамасыз етеді.",
+      "Техникалық құралдарға сандық құрылғылар, электронды технологиялар және телекоммуникациялық технологиялық өнімдер кіреді.",
+      "ГАЖ технологиялары заманауи сандық карталарды пайдалану, өлшеу, есептеу және кеңістіктік деректерді талдауға мүмкіндік береді."
+    ],
+    facts:[
+      "Техникалық құралдар: сандық құрылғылар, электронды технологиялар, телекоммуникациялық технологиялық өнімдер.",
+      "Графикалық көрнекіліктер: картограмма, тірек сызбалар, картодиаграмма.",
+      "Мультимедиа әртүрлі топқа жататын ақпараттарды өңдеу мен ұсынуға байланысты.",
+      "ГАЖ міндеттері: картамен есептеу, сандық карта арқылы өлшеу, заманауи сандық картаны пайдалану.",
+      "Дескриптор — тапсырмаларды орындаудың нақты қадамдарының сипаттамасы."
+    ],
+    questions:[
+      {
+        q:"Географияны оқытудағы техникалық құралдарды белгілеңіз.",
+        type:"multi",
+        options:[
+          "Сандық құрылғылар",
+          "Электронды технологиялар",
+          "Телекоммуникациялық технологиялық өнімдер",
+          "Сөздіктер",
+          "Хрестоматиялар",
+          "Оқу әдістемелік құралдар"
+        ],
+        answer:[0,1,2],
+        exp:"Пробный тестте техникалық құралдар ретінде сандық құрылғылар, электронды технологиялар және телекоммуникациялық өнімдер берілген."
+      },
+      {
+        q:"География пәнінде қолданылатын графикалық көрнекіліктерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Картограмма",
+          "Тірек сызбалар",
+          "Картодиаграмма",
+          "Бейнетаспалар",
+          "Аудиотаспалар",
+          "Пайдалы қазбалардың коллекциялары"
+        ],
+        answer:[0,1,2],
+        exp:"Графикалық көрнекіліктерге картограмма, тірек сызбалар және картодиаграмма жатады."
+      },
+      {
+        q:"Мультимедианың әдістемелік қызметіне сәйкес тұжырым қайсы?",
         type:"single",
-        options:["Роберт Скотт","Руаль Амундсен","Джон Кабот","Христофор Колумб","Пржевальский"],
+        options:[
+          "Әртүрлі ақпараттарды өңдеу мен ұсынуға тікелей байланысты компьютерлік бағдарламалық қамтамасыз ету",
+          "Тек метеорологиялық жабдықтардың виртуалды үлгісі",
+          "Оқу үрдісіндегі тақырыптық үлгілік бағдарлама",
+          "Бағалау критерийлерін қағаз түрінде сақтау құралы",
+          "Тек картографиялық шартты белгілерді жаттату тәсілі"
+        ],
         answer:[0],
-        exp:"Ағылшын экспедициясын Роберт Скотт басқарды."
+        exp:"Мультимедиа әртүрлі ақпараттарды өңдеу және ұсынумен байланысты."
       },
       {
-        q:"6. БҰҰ құрылған жыл қайсы?",
-        type:"single",
-        options:["1919","1939","1945","1957","1992"],
-        answer:[2],
-        exp:"БҰҰ 1945 жылы құрылды."
+        q:"Мектеп географиясында ГАЖ технологиясын пайдаланудың негізгі міндеттерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Карталарды пайдаланып есептеулер жүргізу",
+          "Сандық карталарды пайдаланып өлшеулер жүргізу",
+          "Заманауи сандық картаны пайдалану",
+          "Когнитивтік алдау әдісін қолдану",
+          "Авторитарлы қарым-қатынас стилін күшейту",
+          "Оқулық мәтінін өзгеріссіз көшіру"
+        ],
+        answer:[0,1,2],
+        exp:"ГАЖ міндеттері картамен есептеу, сандық карта арқылы өлшеу және заманауи сандық картаны пайдаланумен байланысты."
       },
       {
-        q:"7. Қазақстан БҰҰ-на қай жылы мүше болды?",
+        q:"Дескриптор ұғымының дұрыс анықтамасы қайсы?",
         type:"single",
-        options:["1986","1991","1992","1995","1997"],
-        answer:[2],
-        exp:"Қазақстан БҰҰ-на 1992 жылы 2 наурызда кірді."
-      },
-      {
-        q:"8. Испанияның астанасы қай қала?",
-        type:"single",
-        options:["Барселона","Мадрид","Севилья","Валенсия","Лиссабон"],
+        options:[
+          "Оқушының сабақ соңындағы эмоциялық әсері",
+          "Тапсырмаларды орындаудың нақты қадамдарының сипаттамасы",
+          "Бағалау нәтижесін талқылау рәсімі",
+          "Сабақтан кейінгі жалпы пікір алмасу",
+          "Оқу материалының тақырыптық атауы"
+        ],
         answer:[1],
-        exp:"Испания астанасы — Мадрид."
+        exp:"Дескриптор тапсырманың нақты орындалу қадамдарын сипаттайды."
       },
       {
-        q:"9. Компасты алғаш ойлап тапқан ел ретінде қайсы көрсетіледі?",
+        q:"Картограмма мен картодиаграмманың ортақ әдістемелік қызметі қайсы?",
         type:"single",
-        options:["Қытай","Үндістан","Грекия","Португалия","Италия"],
+        options:[
+          "Кеңістіктік және сандық ақпаратты карта негізінде салыстыруға көмектесу",
+          "Оқушының терминдік сөздікпен жұмысын алмастыру",
+          "Сабақтағы барлық бағалау түрін жою",
+          "Тек мұғалімнің ауызша баяндауын күшейту",
+          "Оқулық мәтінін картадан ажыратып түсіндіру"
+        ],
         answer:[0],
-        exp:"Магнитті компасты Қытай ойлап тапқан деп беріледі."
+        exp:"Картограмма мен картодиаграмма кеңістіктік және сандық ақпаратты карта негізінде көрсетеді."
       },
       {
-        q:"10. 2011 жылы картаға енген мемлекет қайсы?",
+        q:"Сандық карта география сабағында қандай әрекетке көбірек мүмкіндік береді?",
         type:"single",
-        options:["Косово","Оңтүстік Судан","Шығыс Тимор","Черногория","Эритрея"],
-        answer:[1],
-        exp:"2011 жылы картаға енген мемлекет — Оңтүстік Судан."
+        options:[
+          "Нысанның орналасуын, арақашықтықты және кеңістіктік байланысты интерактивті талдау",
+          "Терминді карта мен дерексіз жаттау",
+          "Сабақ мазмұнын оқу мақсатынан ажырату",
+          "Оқушының дербес жұмысын толық шектеу",
+          "Географиялық ақпаратты тек мәтін түрінде беру"
+        ],
+        answer:[0],
+        exp:"Сандық карта нысан, өлшеу, орналасу және кеңістіктік талдау әрекетін қолдайды."
+      },
+      {
+        q:"Оқыту құралын таңдауда ең маңызды әдістемелік талап қайсы?",
+        type:"single",
+        options:[
+          "Құралдың оқу мақсатына, мазмұнға, оқушы әрекетіне және күтілетін нәтижеге сәйкес болуы",
+          "Құралдың сыртқы көрінісіне қарай ғана таңдалуы",
+          "Құралдың бағалау критерийінен толық бөлек қолданылуы",
+          "Құралдың оқушы жас ерекшелігіне сәйкес келмеуі",
+          "Құралдың сабақ тақырыбымен байланыспауы"
+        ],
+        answer:[0],
+        exp:"Оқыту құралы мақсат, мазмұн, әрекет және нәтиже жүйесіне сәйкес болуы керек."
+      },
+      {
+        q:"География кабинетінің оқу-танымдық қызметке әсерін дұрыс сипаттайтын жауап қайсы?",
+        type:"single",
+        options:[
+          "Карта, атлас, модель, кесте және сандық құрал арқылы оқушының талдау әрекетін ұйымдастырады",
+          "Оқушыны карта және дерекпен жұмыс істеуден алыстатады",
+          "Сабақты тек мұғалімнің ауызша түсіндіруімен шектейді",
+          "Оқу мақсаты мен құрал арасындағы байланысты әлсіретеді",
+          "Практикалық тапсырманы толық қажетсіз етеді"
+        ],
+        answer:[0],
+        exp:"География кабинеті оқушының көрнекі, практикалық және зерттеушілік әрекетіне жағдай жасайды."
+      },
+      {
+        q:"Географиядағы көрнекілік әдісінің негізгі қызметі қайсы?",
+        type:"single",
+        options:[
+          "Географиялық нысан, құбылыс және байланыстарды нақты әрі бейнелі көрсету",
+          "Географиялық білімді картадан ажыратып жаттату",
+          "Оқушының кеңістіктік ойлауын шектеу",
+          "Дерекпен жұмыс істеуді сабақтан алып тастау",
+          "Бағалау критерийін қажетсіз ету"
+        ],
+        answer:[0],
+        exp:"Көрнекілік әдісі географиялық нысан мен құбылысты нақты түсіндіруге көмектеседі."
+      }
+    ]
+  },
+  {
+    id:"lesson",
+    title:"Сабақ, практикалық жұмыс және экскурсия",
+    short:"ҚМЖ, ұзақ мерзімді жоспар, критерий, дескриптор, практикалық жұмыс, экскурсия.",
+    level:"B/C",
+    theory:[
+      "География сабағы — оқу бағдарламасындағы мақсаттарға сәйкес білім, білік, дағды және құзыреттер қалыптастыратын негізгі оқу формасы.",
+      "Жаңартылған мазмұндағы үлгілік оқу бағдарламасына сәйкес жүзеге асырылатын жоспар — ұзақ мерзімді жоспар.",
+      "Оқу жоспарына сәйкес экскурсиялар оқу және оқудан тыс экскурсиялар болып жіктеледі. Практикалық жұмыс карталар, атластар, кестелер, оқулықтар және нұсқама арқылы орындалады."
+    ],
+    facts:[
+      "Жаңартылған бағдарламаға сәйкес жүзеге асырылатын жоспар — ұзақ мерзімді жоспар.",
+      "Экскурсиялар оқу және оқудан тыс болып жіктеледі.",
+      "Практикалық жұмыста қолданылатын білім көздері: кесте, нұсқама, географиялық карталар, атластар, оқулықтар.",
+      "Бағалау критерийі оқу мақсатына жетуді анықтайды.",
+      "Дескриптор тапсырманы орындау қадамдарын нақтылайды."
+    ],
+    questions:[
+      {
+        q:"Оқу пәні бойынша жаңартылған мазмұндағы үлгілік оқу бағдарламасына сәйкес жүзеге асырылатын жоспар қайсы?",
+        type:"single",
+        options:[
+          "Аралық жоспар",
+          "Кварталдық жоспар",
+          "Орта мерзімді жоспар",
+          "Тоқсандық жоспар",
+          "Ұзақ мерзімді жоспар"
+        ],
+        answer:[4],
+        exp:"Пробный тестте бұл сұрақтың дұрыс жауабы ұзақ мерзімді жоспар ретінде беріледі."
+      },
+      {
+        q:"Оқу жоспарына сәйкес экскурсиялар қалай жіктеледі?",
+        type:"multi",
+        options:[
+          "Оқу",
+          "Оқудан тыс",
+          "Маманданған",
+          "Арнайы",
+          "Қысқа мерзімді",
+          "Қосымша"
+        ],
+        answer:[0,1],
+        exp:"Экскурсиялар оқу жоспарына сәйкес оқу және оқудан тыс болып жіктеледі."
+      },
+      {
+        q:"Практикалық жұмысты орындауда қолданылатын негізгі білім көздерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Кесте",
+          "Нұсқама",
+          "Географиялық карталар",
+          "Атластар",
+          "Оқулықтар",
+          "Авторитарлы қарым-қатынас стилі"
+        ],
+        answer:[0,1,2,3,4],
+        exp:"Практикалық жұмыста кесте, нұсқама, карта, атлас және оқулық қолданылады."
+      },
+      {
+        q:"География сабағындағы ҚМЖ құрамына кіретін негізгі бөліктерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Оқу мақсаты",
+          "Бағалау критерийі",
+          "Тапсырма және дескриптор",
+          "Оқыту әдістері мен құралдары",
+          "Кен орнының өндірістік қоры",
+          "Сыныпқа қатысы жоқ әкімшілік есеп"
+        ],
+        answer:[0,1,2,3],
+        exp:"ҚМЖ оқу мақсаты, критерий, тапсырма, дескриптор, әдіс және құралдар арқылы құрылады."
+      },
+      {
+        q:"Бағалау критерийінің әдістемелік қызметі қайсы?",
+        type:"single",
+        options:[
+          "Оқу мақсатына жетуді анықтайтын нақты талапты көрсету",
+          "Оқушыға тапсырманы түсініксіз ету",
+          "Сабақ мазмұнын бағалаудан ажырату",
+          "Кері байланысты толық алып тастау",
+          "Практикалық жұмысты дерексіз орындау"
+        ],
+        answer:[0],
+        exp:"Бағалау критерийі оқушы жұмысының қандай талап бойынша бағаланатынын көрсетеді."
+      },
+      {
+        q:"Практикалық жұмысқа сәйкес келетін тапсырма қайсы?",
+        type:"single",
+        options:[
+          "Картадан нысан табу, кестедегі деректі салыстыру және қорытынды жасау",
+          "Оқулық мәтінін мағынасын түсінбей көшіру",
+          "Терминдерді карта мен дерексіз жаттау",
+          "Сабақ мақсатын тапсырма нәтижесінен бөлу",
+          "Бағалау критерийін қолданбау"
+        ],
+        answer:[0],
+        exp:"Практикалық жұмыс карта, дерек, салыстыру және қорытынды жасауға негізделеді."
+      },
+      {
+        q:"Оқу экскурсиясының негізгі ерекшелігі қайсы?",
+        type:"single",
+        options:[
+          "Оқу тақырыбымен байланысты нақты нысанды бақылау арқылы білімді бекіту",
+          "Сабақ мазмұнымен байланыспайтын еркін серуен",
+          "Оқушының бақылау әрекетін қажет етпейтін жұмыс",
+          "Картографиялық дағдыны сабақтан алып тастау",
+          "Бағалау мен қорытындыны қолданбау"
+        ],
+        answer:[0],
+        exp:"Оқу экскурсиясы оқу мазмұнымен тікелей байланысып, нақты нысан арқылы білімді бекітеді."
+      },
+      {
+        q:"Экскурсия кезінде орындалатын әдістемелік әрекеттерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Нысанды бақылау",
+          "Сипаттау және салыстыру",
+          "Дерек жинау",
+          "Қорытынды жасау",
+          "Картамен немесе мәтінмен байланыстыру",
+          "Географияға қатысы жоқ мәтін көшіру"
+        ],
+        answer:[0,1,2,3,4],
+        exp:"Экскурсия бақылау, сипаттау, дерек жинау, салыстыру және қорытынды жасау әрекеттерінен тұрады."
+      },
+      {
+        q:"Кері байланыстың сабақтағы қызметі қайсы?",
+        type:"single",
+        options:[
+          "Оқушының түсіну деңгейін, қиындықтарын және келесі әрекетін анықтау",
+          "Оқушы нәтижесін белгісіз талаппен бағалау",
+          "Сабақ тапсырмасын оқу мақсатынан бөлу",
+          "Картаны қолдануды қажетсіз ету",
+          "Дескрипторды тапсырмадан ажырату"
+        ],
+        answer:[0],
+        exp:"Кері байланыс оқушының қазіргі деңгейін және келесі қадамын анықтайды."
+      },
+      {
+        q:"Сабақ типін таңдауда ең маңызды байланыс қайсы?",
+        type:"single",
+        options:[
+          "Оқу мақсаты, мазмұн, оқушы әрекеті және күтілетін нәтиже байланысы",
+          "Оқулықтағы суреттердің сыртқы орналасуы",
+          "Сынып бөлмесінің жиһаз үлгісі",
+          "Мектеп дәлізіндегі хабарландырулар",
+          "Оқушының пәнге қатысы жоқ бос уақыты"
+        ],
+        answer:[0],
+        exp:"Сабақ типі оқу мақсаты мен күтілетін нәтижеге сәйкес таңдалады."
+      }
+    ]
+  },
+  {
+    id:"extracurricular",
+    title:"Сыныптан тыс жұмыс, үйірме, факультатив және өлкетану",
+    short:"Үйірме, олимпиада, жоба, ойын, табиғатпен жұмыс, өлкетану, факультатив.",
+    level:"A/B",
+    theory:[
+      "Сыныптан тыс жұмыс оқушының географияға қызығушылығын арттырады, білімін тереңдетеді, ой-өрісін кеңейтеді және қосымша білім мен ұжымдық тәрбие береді.",
+      "Сыныптан тыс жұмыстарды ұйымдастыру әдістеріне табиғатпен жұмыс, анкета жүргізу, ойын іс-әрекеті және өлкетану жұмыстары жатады.",
+      "Факультатив пен өлкетану оқушының жеке қызығушылығын, зерттеушілік дағдысын және жергілікті материалмен жұмысын дамытады."
+    ],
+    facts:[
+      "Сыныптан тыс жұмыс мақсаты: білімді тереңдету, қосымша білім және ұжымдық тәрбие, географиялық ой-өрісті кеңейту.",
+      "Сыныптан тыс жұмысты ұйымдастыру әдістері: табиғатпен жұмыс, анкета жүргізу, ойын іс-әрекеті, өлкетану жұмыстары.",
+      "Географиялық үйірме бөлімдері: мақсат-міндет, құрылым, жұмыс құрамы мен тәсілдері.",
+      "Өлкетану жергілікті жердің табиғатын, халқын, шаруашылығын және экологиялық жағдайын зерттейді."
+    ],
+    questions:[
+      {
+        q:"Географияда сыныптан тыс жұмыстардың мақсаттарын белгілеңіз.",
+        type:"multi",
+        options:[
+          "География ғылымы аумағында білімдерін тереңдету",
+          "Қосымша білім және ұжымдық тәрбие беру",
+          "Оқушылардың географиялық ой-өрісін кеңейту",
+          "Оқушыларға тек этнографиялық білім беру",
+          "Қоғамтану мақсатында біліктілігін тереңдету",
+          "Оқушыны жеке оқытумен шектеу"
+        ],
+        answer:[0,1,2],
+        exp:"Пробный материалда сыныптан тыс жұмыстың негізгі мақсаты білімді тереңдету, қосымша білім мен ұжымдық тәрбие беру, ой-өрісті кеңейту ретінде беріледі."
+      },
+      {
+        q:"Географиядан сыныптан тыс жұмыстарды ұйымдастыру әдістерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Табиғатпен жұмыс",
+          "Анкета жүргізу",
+          "Ойын іс-әрекеті",
+          "Өлкетану жұмыстарын жүргізу",
+          "Гидрографиялық әдіс",
+          "Статистикалық басылым"
+        ],
+        answer:[0,1,2,3],
+        exp:"Сыныптан тыс жұмыстар табиғатпен жұмыс, анкета, ойын және өлкетану арқылы ұйымдастырылады."
+      },
+      {
+        q:"Географиялық пәндік үйірме бағытын құрайтын бөлімдерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Үйірменің мақсаты мен міндеті",
+          "Үйірме құрылымы",
+          "Үйірменің жұмыс құрамы мен тәсілдері",
+          "Үйірме мүшелері",
+          "Үйірмеде алынған зерттеу нәтижелерін рәсімдеу",
+          "Үйірмедегі мәселелер"
+        ],
+        answer:[0,1,2],
+        exp:"Үйірме бағыты мақсат-міндет, құрылым және жұмыс құрамы мен тәсілдері арқылы анықталады."
+      },
+      {
+        q:"Өлкетану жұмысының негізгі мазмұны қайсы?",
+        type:"single",
+        options:[
+          "Жергілікті жердің табиғатын, халқын, шаруашылығын, тарихын және экологиялық жағдайын зерттеу",
+          "Географиялық терминдерді жергілікті мысалсыз жаттау",
+          "Сабақ мазмұнын оқушы өмір сүретін ортамен байланыстырмау",
+          "Оқушының карта және бақылау әрекетін шектеу",
+          "Географияны тек дүниежүзілік атаулар тізімімен шектеу"
+        ],
+        answer:[0],
+        exp:"Өлкетану жергілікті аумақты табиғи, әлеуметтік, шаруашылық және экологиялық тұрғыдан зерттейді."
+      },
+      {
+        q:"Факультативтік курстың негізгі мақсаты қайсы?",
+        type:"single",
+        options:[
+          "Оқушының пәндік қызығушылығын тереңдетіп, қосымша білім мен зерттеушілік дағды қалыптастыру",
+          "Сабақтағы оқу мақсатын бағалау критерийінен ажырату",
+          "Географиялық білімді тек анықтамаларды жаттаумен шектеу",
+          "Карта, дерек және жергілікті материалды қолданбау",
+          "Оқушының дербес ізденісін шектеу"
+        ],
+        answer:[0],
+        exp:"Факультатив оқушының қызығушылығын, терең білімін және зерттеу дағдысын дамытады."
+      },
+      {
+        q:"Сыныптан тыс жұмыстың оқушыға беретін нәтижелерін белгілеңіз.",
+        type:"multi",
+        options:[
+          "Пәнге қызығушылықты арттыру",
+          "Дербес ізденіс пен шығармашылықты дамыту",
+          "Зерттеу және бақылау дағдыларын қалыптастыру",
+          "Ұжымдық әрекет пен жауапкершілікті дамыту",
+          "Картамен жұмыс істеуді шектеу",
+          "Пәндік білімді өмірден бөлу"
+        ],
+        answer:[0,1,2,3],
+        exp:"Сыныптан тыс жұмыс қызығушылық, ізденіс, шығармашылық, зерттеу және ұжымдық әрекетті дамытады."
+      },
+      {
+        q:"Экологиялық акцияның әдістемелік мәні қайсы?",
+        type:"single",
+        options:[
+          "Оқушының экологиялық мәдениетін, жауапкершілігін және практикалық әрекетін дамыту",
+          "Табиғатты қорғау мәселесін пән мазмұнынан бөлу",
+          "Жергілікті экологиялық жағдайды бақыламау",
+          "Табиғат пен қоғам байланысын түсіндірмеу",
+          "Практикалық тәрбиелік жұмысты әлсірету"
+        ],
+        answer:[0],
+        exp:"Экологиялық акция пәндік білімді экологиялық жауапкершілікпен байланыстырады."
+      },
+      {
+        q:"Өлкетану тапсырмасына сәйкес келетін әрекет қайсы?",
+        type:"single",
+        options:[
+          "Өз өңіріндегі өзеннің жағдайын бақылау, сипаттау және экологиялық қорытынды жасау",
+          "Географиялық терминдерді өңірлік мысалсыз жаттау",
+          "Оқулық мәтінін жергілікті дерексіз көшіру",
+          "Карта мен бақылау нәтижесін қолданбау",
+          "Географиялық білімді оқушы ортасынан бөлу"
+        ],
+        answer:[0],
+        exp:"Өлкетану нақты жергілікті нысанды бақылау және қорытынды жасауға негізделеді."
+      },
+      {
+        q:"Географиялық конференцияның әдістемелік мақсаты қайсы?",
+        type:"single",
+        options:[
+          "Оқушылардың зерттеу нәтижесін баяндау, дәлелдеу және талқылау қабілетін дамыту",
+          "Зерттеу нәтижесін дерексіз қалдыру",
+          "Оқушының ғылыми тілін қолданбауына жағдай жасау",
+          "Географиялық мәселені талқылаудан алып тастау",
+          "Ауызша сөйлеу және дәлелдеу әрекетін шектеу"
+        ],
+        answer:[0],
+        exp:"Конференция зерттеу нәтижесін ғылыми тілде қорғау мен талқылауға үйретеді."
+      },
+      {
+        q:"Факультатив пен өлкетануды тиімді ұйымдастырудың кешенді нәтижесі қайсы?",
+        type:"single",
+        options:[
+          "Оқушының терең білім алуы, өз өңірін тануы, зерттеу және практикалық дағдыларының дамуы",
+          "Географиялық білімнің нақты өмірден ажырауы",
+          "Оқушының карта, дерек және бақылау нәтижесін қолданбауы",
+          "Қосымша оқу жұмысының негізгі мазмұннан толық бөлінуі",
+          "Пәндік қызығушылық пен зерттеушілік қабілеттің төмендеуі"
+        ],
+        answer:[0],
+        exp:"Факультатив пен өлкетану білімді тереңдетіп, жергілікті материал және зерттеу арқылы практикалық дағды қалыптастырады."
+      }
+    ]
+  },
+  {
+    id:"classes",
+    title:"7–11 сынып әдістемесі және пәндік терминдер",
+    short:"7-сынып, Қазақстан физикалық географиясы, 9-сынып, 10–11 сынып, терминдер.",
+    level:"B/C",
+    theory:[
+      "7–11 сынып географиясын оқытуда әр курс мазмұны оқушы жас ерекшелігіне, пәндік логикаға және оқу мақсатына сәйкес ұйымдастырылады.",
+      "7-сыныпта табиғат нысандары, табиғат құбылыстары, үрдістер және Жер заңдылықтарын түсіндіретін ғылыми білім маңызды.",
+      "Қазақстанның физикалық, экономикалық және әлеуметтік географиясы курстарында нақты тақырыпқа сәйкес ғылыми терминдер, карта, дерек және есептер қолданылады."
+    ],
+    facts:[
+      "7-сынып мазмұны: табиғат нысандары, түрлі табиғат құбылыстары мен үрдістер, ғылыми білім.",
+      "Қазақстан физикалық географиясы мазмұны: Қазақстан табиғатына жалпы сипаттама, табиғат ресурстарын тиімді пайдалану, Қазақстан табиғатының зерттелуі.",
+      "Халық және еңбек ресурстары терминдері: депопуляция, репатриация, субурбандалу.",
+      "Конструкциялық материалдар өндірісі терминдері: флотация, агломерат, концентрат.",
+      "Саяси карта терминдері: демаркациялық сызық, геосаясат, анклав."
+    ],
+    questions:[
+      {
+        q:"«Қазақстанның физикалық географиясы» тақырыбындағы беру мазмұнын белгілеңіз.",
+        type:"multi",
+        options:[
+          "Қазақстан табиғатына жалпы сипаттама",
+          "Қазақстан табиғатының зерттелуі",
+          "Табиғат ресурстарын тиімді пайдалану",
+          "Геосаяси білім беру",
+          "Әлеуметтік салалар",
+          "Мазмұнының сәйкессіздігі"
+        ],
+        answer:[0,1,2],
+        exp:"Пробный материалда Қазақстан физикалық географиясы мазмұны ретінде табиғатқа сипаттама, зерттелуі және ресурстарды тиімді пайдалану берілген."
+      },
+      {
+        q:"Жалпы білім беретін мектептің 7-сыныбына арналған география мазмұнына кіретін компоненттерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Табиғат нысандары",
+          "Түрлі табиғат құбылыстары мен үрдістер",
+          "Жер заңдылықтарын түсіндіретін ғылыми білім",
+          "Картографиялық деректер базасын құру",
+          "Қазақстанның физико-географиялық жағдайын анықтау",
+          "Геосаяси білім беру"
+        ],
+        answer:[0,1,2],
+        exp:"7-сынып мазмұнында табиғат нысандары, құбылыстар мен үрдістер және ғылыми білім негізгі орын алады."
+      },
+      {
+        q:"«Қазақстанның экономикалық және әлеуметтік географиясы» курсындағы «Халқы және еңбек ресурстары» бөлімінде қолданылатын терминдерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Депопуляция",
+          "Репатриация",
+          "Субурбандалу",
+          "Флотация",
+          "Агломерат",
+          "Концентрат"
+        ],
+        answer:[0,1,2],
+        exp:"Халық және еңбек ресурстары бөлімінде депопуляция, репатриация, субурбандалу терминдері қолданылады."
+      },
+      {
+        q:"«Конструкциялық материалдар өндірісінің кешендері мен салалары» тақырыбында қолданылатын ғылыми терминдерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Флотация",
+          "Агломерат",
+          "Концентрат",
+          "Депопуляция",
+          "Репатриация",
+          "Субурбандалу"
+        ],
+        answer:[0,1,2],
+        exp:"Бұл өндірістік тақырыпқа флотация, агломерат және концентрат терминдері сәйкес келеді."
+      },
+      {
+        q:"«Тарихи географиялық аймақтар. Дүниежүзінің саяси картасы» тақырыбында қолданылатын терминдерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Демаркациялық сызық",
+          "Геосаясат",
+          "Анклав",
+          "Индустрия",
+          "Джентрификация",
+          "Урбандалу"
+        ],
+        answer:[0,1,2],
+        exp:"Саяси карта тақырыбына демаркациялық сызық, геосаясат және анклав терминдері сәйкес."
+      },
+      {
+        q:"«Табиғат қорғау және табиғат қорларын тиімді пайдалану» бөлімінің негізгі ұғымдарын белгілеңіз.",
+        type:"multi",
+        options:[
+          "Қазақстан қорықтары",
+          "Экологиялық факторлар",
+          "Экологиялық жағдайлар",
+          "Интрузия",
+          "Моласса",
+          "Неотектоника"
+        ],
+        answer:[0,1,2],
+        exp:"Бұл бөлім табиғатты қорғау мазмұнына сәйкес қорықтар, экологиялық факторлар және экологиялық жағдайлармен байланысты."
+      },
+      {
+        q:"«Климат» тақырыбындағы 2–3 дәрежелі қиындықтағы тапсырмаларға сәйкес әрекеттерді белгілеңіз.",
+        type:"multi",
+        options:[
+          "Климаттың салыстырмалы сипаттамасын беру",
+          "Климаттардың ұқсастықтары мен айырмашылықтарын топтастыру",
+          "Қажетті деректерді жүйелеу",
+          "Климаттық картадағы көрсеткіштерді сипаттау",
+          "Тек терминдерді мағынасыз жаттау",
+          "Сабақ мақсатын деректен бөлу"
+        ],
+        answer:[0,1,2,3],
+        exp:"Күрделі климат тапсырмалары салыстыру, топтастыру, дерек жүйелеу және карта көрсеткіштерін сипаттауға негізделеді."
+      },
+      {
+        q:"Қазақстанның экономикалық және әлеуметтік географиясы курсында есептер шығаруға арналған тақырыптарды белгілеңіз.",
+        type:"multi",
+        options:[
+          "Халықтың қоныстануының географиялық ерекшеліктері",
+          "Халық саны мен табиғи өсім ерекшеліктері",
+          "Агроөнеркәсіптік кешен құрылымы мен маңызы",
+          "Тарихи өлкетану бағыттары",
+          "Табиғат кешендері",
+          "Геосаяси жағдайды саяси сипаттау"
+        ],
+        answer:[0,1,2],
+        exp:"Есептер халықтың қоныстануы, табиғи өсім және агроөнеркәсіптік кешен сияқты сандық-талдамалы тақырыптармен байланысты."
+      },
+      {
+        q:"Вербальды-ақпараттық оқытуға сәйкес ресурс қайсы?",
+        type:"single",
+        options:[
+          "Мерзімді баспасөз құралдары арқылы ақпарат беру",
+          "Гербарийлер жинақтары",
+          "Метеорологиялық жабдықтар",
+          "Кинофильм",
+          "Тау жыныстарының үлгілері"
+        ],
+        answer:[0],
+        exp:"Вербальды-ақпараттық оқытуда ақпарат сөздік-мәтіндік арна арқылы, соның ішінде мерзімді баспасөз арқылы беріледі."
+      },
+      {
+        q:"9-сыныпқа арналған Қазақстанның экономикалық және әлеуметтік географиясы оқулығындағы жаттығулар мен өзіндік бақылау блогына сәйкес атауларды белгілеңіз.",
+        type:"multi",
+        options:[
+          "Нені меңгеру керек",
+          "Ойлан тап",
+          "Өзіңді тексер",
+          "Сенің көзқарасың",
+          "Гидрографтар құру",
+          "Когнитивтік алдау"
+        ],
+        answer:[0,1,2,3],
+        exp:"Пробный материалда 9-сынып оқулығының өзіндік бақылау блогында осындай атаулар берілген."
       }
     ]
   }
@@ -785,18 +1334,26 @@ nav.appendChild(makeBtn("Финал тест","final"));
 function openPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   const el=document.getElementById(id);
-  if(el){el.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+  if(el){
+    el.classList.add("active");
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
 }
 
-function letters(i){return ["A","B","C","D","E","F"][i];}
-function answerText(q){return q.answer.map(i=>letters(i)).join(", ");}
+function letters(i){
+  return ["A","B","C","D","E","F","G","H"][i];
+}
+
+function answerText(q){
+  return q.answer.map(i=>letters(i)).join(", ");
+}
 
 function renderQuestions(qs,prefix){
   return `
     <div class="test-box">
       ${qs.map((q,idx)=>`
         <div class="question" data-answer="${q.answer.join(",")}" data-type="${q.type}">
-          <h4>${idx+1}. ${q.q.replace(/^\d+\.\s*/,"")}</h4>
+          <h4>${idx+1}. ${q.q}</h4>
           <div class="options">
             ${q.options.map((op,i)=>`
               <label class="option">
@@ -827,7 +1384,7 @@ sections.forEach((s,i)=>{
       <p>${s.short}</p>
     </div>
     <div class="tags">
-      <span class="tag">География</span>
+      <span class="tag">Әдістеме</span>
       <span class="tag">${s.level} деңгей</span>
       <span class="tag">10 сұрақ</span>
     </div>
@@ -882,7 +1439,11 @@ finalPage.innerHTML=`
       <span>Қорытынды тест</span>
     </div>
     <h2>Финалдық КТ тест</h2>
-    <p>Барлық бөлім бойынша аралас қорытынды тест. Сұрақтар картография, физикалық география, Қазақстан, дүниежүзі географиясы, экономикалық география және саяхатшылар тақырыптарынан алынды.</p>
+    <p>
+      Барлық бөлім бойынша аралас қорытынды тест. Сұрақтар әдістеме негіздері,
+      оқыту әдістері, жаңа технологиялар, құралдар, ГАЖ, сабақ, практикалық жұмыс,
+      экскурсия, сыныптан тыс жұмыс, факультатив, өлкетану және 7–11 сынып әдістемесінен алынды.
+    </p>
     <div class="info">
       <div><b>Сұрақ саны</b><span>30 тапсырма</span></div>
       <div><b>Формат</b><span>Аралас тест</span></div>
@@ -904,7 +1465,8 @@ function norm(arr){
 function checkTest(btn){
   const box=btn.closest(".test-box");
   const questions=box.querySelectorAll(".question");
-  let correct=0, answered=0;
+  let correct=0;
+  let answered=0;
 
   questions.forEach(q=>{
     const answer=norm(q.dataset.answer.split(","));
@@ -941,6 +1503,7 @@ function checkTest(btn){
         }
       });
     }
+
     explain.style.display="block";
   });
 
@@ -950,7 +1513,11 @@ function checkTest(btn){
   const summary=document.createElement("div");
   summary.className="summary";
   const percent=Math.round((correct/questions.length)*100);
-  summary.innerHTML=`Нәтиже: ${correct} / ${questions.length} дұрыс жауап. Белгіленген сұрақтар: ${answered} / ${questions.length}. Пайыз: ${percent}%.`;
+  summary.innerHTML=
+    `Нәтиже: ${correct} / ${questions.length} дұрыс жауап. ` +
+    `Белгіленген сұрақтар: ${answered} / ${questions.length}. ` +
+    `Пайыз: ${percent}%.`;
+
   btn.parentElement.insertAdjacentElement("afterend",summary);
 }
 
