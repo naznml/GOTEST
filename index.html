@@ -1,1 +1,970 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>География пәні | КТ дайындық</title>
 
+<style>
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --text:#102033;
+  --muted:#64748b;
+  --primary:#2563eb;
+  --primary2:#0f766e;
+  --soft:#eaf2ff;
+  --soft2:#ecfdf5;
+  --border:#dbe4f0;
+  --green:#16a34a;
+  --red:#dc2626;
+  --shadow:0 18px 45px rgba(15,23,42,.08);
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 30%),
+    radial-gradient(circle at top right,rgba(15,118,110,.12),transparent 32%),
+    linear-gradient(180deg,#fbfdff 0%,#f5f7fb 100%);
+  line-height:1.65;
+}
+button,input{font-family:inherit}
+.app{width:min(1180px,calc(100% - 28px));margin:0 auto;padding:24px 0 70px}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:15px 18px;background:rgba(255,255,255,.92);
+  border:1px solid var(--border);border-radius:24px;box-shadow:0 12px 35px rgba(15,23,42,.06);
+  backdrop-filter:blur(14px);position:sticky;top:10px;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:44px;height:44px;border-radius:15px;display:grid;place-items:center;
+  background:linear-gradient(135deg,#2563eb,#0f766e);color:white;font-weight:900;
+}
+.brand b{display:block;font-size:16px;line-height:1.2}
+.brand span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.nav button,.back{
+  border:1px solid var(--border);background:#fff;color:var(--text);
+  padding:9px 12px;border-radius:999px;font-size:12px;font-weight:850;cursor:pointer;transition:.18s;
+}
+.nav button:hover,.back:hover{border-color:rgba(37,99,235,.45);color:var(--primary);transform:translateY(-1px)}
+.page{display:none;animation:fade .22s ease both}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{
+  margin-top:22px;border-radius:32px;padding:44px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#0b214f,#2563eb);color:#fff;box-shadow:var(--shadow);
+}
+.hero:before{content:"";position:absolute;right:120px;bottom:-130px;width:280px;height:280px;border-radius:50%;background:rgba(15,118,110,.34)}
+.hero:after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.12)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  font-size:13px;font-weight:850;margin-bottom:15px;
+}
+h1{margin:0 0 14px;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacing:-.04em}
+.hero p{margin:0;max-width:900px;color:rgba(255,255,255,.86);font-size:17px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.stat{padding:14px;border-radius:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18)}
+.stat b{display:block;font-size:24px;line-height:1}
+.stat span{font-size:13px;color:rgba(255,255,255,.78);font-weight:750}
+.section{margin-top:28px}
+.section h2{font-size:26px;margin:0 0 8px;letter-spacing:-.02em}
+.desc{color:var(--muted);margin:0 0 16px;max-width:850px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{
+  padding:24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:0 14px 35px rgba(15,23,42,.06);cursor:pointer;transition:.2s;min-height:190px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:14px;position:relative;overflow:hidden;
+}
+.card:after{content:"";position:absolute;right:-44px;top:-44px;width:135px;height:135px;border-radius:50%;background:var(--soft)}
+.card:hover{transform:translateY(-5px);border-color:rgba(37,99,235,.35);box-shadow:0 22px 45px rgba(15,23,42,.1)}
+.num{width:48px;height:48px;border-radius:16px;background:var(--soft);color:var(--primary);display:grid;place-items:center;font-weight:900;position:relative;z-index:1}
+.card h3{margin:0;font-size:21px;line-height:1.22;letter-spacing:-.02em;position:relative;z-index:1}
+.card p{margin:9px 0 0;color:var(--muted);font-size:14px;position:relative;z-index:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
+.tag{padding:6px 10px;border-radius:999px;background:#f8fafc;border:1px solid var(--border);color:#475569;font-size:12px;font-weight:800}
+.topic-hero,.content{
+  background:#fff;border:1px solid var(--border);border-radius:26px;box-shadow:var(--shadow);
+  padding:26px;margin-top:22px;
+}
+.breadcrumb{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;font-weight:800;margin-bottom:12px}
+.topic-hero h2{font-size:clamp(26px,4vw,42px);line-height:1.08;margin:0 0 10px;letter-spacing:-.035em}
+.topic-hero p{margin:0;color:#4b5563;max-width:900px}
+.info{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.info div{padding:14px;background:#f8fafc;border:1px solid var(--border);border-radius:17px}
+.info b{display:block;font-size:14px;margin-bottom:2px}
+.info span{font-size:13px;color:var(--muted);font-weight:650}
+.theory{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:16px;
+}
+.box{padding:18px;border:1px solid var(--border);border-radius:20px;background:#f8fafc}
+.box h3{margin:0 0 8px;font-size:19px}
+.box p,.box li{color:#374151}
+.box ul{margin:8px 0 0;padding-left:20px}
+.test-box{display:grid;gap:14px;margin-top:16px}
+.question{
+  background:#fff;border:1px solid var(--border);border-radius:20px;padding:18px;
+  box-shadow:0 8px 24px rgba(15,23,42,.045);
+}
+.question h4{margin:0 0 13px;font-size:16px;line-height:1.45}
+.options{display:grid;gap:9px}
+.option{
+  display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--border);
+  border-radius:15px;background:#f8fafc;cursor:pointer;transition:.15s;color:#334155;font-weight:650;
+}
+.option:hover{background:var(--soft);border-color:rgba(37,99,235,.38)}
+.option input{margin-top:4px;flex:none}
+.explain{display:none;margin-top:12px;padding:12px;border-radius:15px;background:#f8fafc;border:1px solid var(--border);color:#475569;font-size:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.check,.reset{
+  border:0;padding:12px 16px;border-radius:16px;font-weight:900;cursor:pointer;
+}
+.check{background:var(--primary);color:#fff}
+.reset{background:#e2e8f0;color:#1f2937}
+.summary{
+  margin-top:14px;padding:14px;border-radius:16px;border:1px solid var(--border);
+  background:#f8fafc;font-weight:850;color:#334155;
+}
+.footer{
+  margin-top:34px;padding:18px;border-radius:22px;background:#fff;border:1px solid var(--border);
+  color:var(--muted);font-size:13px;text-align:center;
+}
+@media(max-width:900px){
+  .topbar{align-items:flex-start;flex-direction:column}
+  .grid,.stats,.info,.theory{grid-template-columns:1fr}
+  .hero{padding:32px 22px;border-radius:25px}
+}
+@media(max-width:640px){
+  .app{width:min(100% - 18px,1180px);padding-top:10px}
+  .nav button{font-size:11px;padding:8px 10px}
+  .topic-hero,.content{padding:20px;border-radius:22px}
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">GEO</div>
+      <div>
+        <b>География пәні</b>
+        <span>КТ дайындық · 1-сайт</span>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+  </header>
+
+  <main>
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="eyebrow">География · Қазақстан · Дүние жүзі · КТ</div>
+        <h1>География пәні бойынша дайындық сайты</h1>
+        <p>
+          Бұл сайт география пәні бойынша пробный тесттер мен ашық дайындық материалдарындағы
+          негізгі тақырыптарды жүйелеп қайталауға арналған. Сұрақтар КТ форматына жақын,
+          жауаптар тексеріледі, әр сұрақтан кейін қысқа түсіндірме беріледі.
+        </p>
+        <div class="stats">
+          <div class="stat"><b>6</b><span>тақырыптық бөлім</span></div>
+          <div class="stat"><b>60</b><span>сұрақ</span></div>
+          <div class="stat"><b>1/3</b><span>дұрыс жауап форматы</span></div>
+          <div class="stat"><b>КТ</b><span>қорытынды дайындық</span></div>
+        </div>
+      </div>
+
+      <section class="section">
+        <h2>Бөлімді таңдаңыз</h2>
+        <p class="desc">Әр бөлімде қысқаша қайталау, негізгі фактілер және күрделендірілген тест сұрақтары бар.</p>
+        <div class="grid" id="cards"></div>
+      </section>
+    </section>
+
+    <div id="pages"></div>
+
+    <footer class="footer">
+      © Назерке. Материалды рұқсатсыз көшіруге, сатуға немесе қайта таратуға болмайды.
+    </footer>
+  </main>
+</div>
+
+<script>
+const sections = [
+  {
+    id:"cartography",
+    title:"Картография және жалпы географиялық ұғымдар",
+    short:"Карта, масштаб, координата, экватор, меридиан, топографиялық карта.",
+    level:"A/B",
+    theory:[
+      "Картография бөлімінде карта, масштаб, географиялық координата, топографиялық карта және Жер туралы негізгі ұғымдар қарастырылады.",
+      "Экватор Жерді Солтүстік және Оңтүстік жарты шарларға бөледі. Географиялық координата ендік пен бойлық арқылы анықталады.",
+      "Масштаб картадағы қашықтық пен жер бетіндегі нақты қашықтықтың арақатынасын көрсетеді. Топографиялық карта жергілікті жерді шартты белгілер арқылы дәл әрі жан-жақты бейнелейді."
+    ],
+    facts:[
+      "Экватор — Солтүстік және Оңтүстік жарты шарларды бөлетін сызық.",
+      "Географиялық координата — ендік пен бойлық.",
+      "Ірі масштаб — 1:100 000 масштабқа дейін.",
+      "Орта масштаб — 1:200 000-нан 1:1 000 000-ға дейін.",
+      "Кіші масштаб — 1:1 000 000-нан кіші.",
+      "1 см — 100 м болса, сандық масштаб 1:10 000."
+    ],
+    questions:[
+      {
+        q:"1. Жерді Солтүстік және Оңтүстік жарты шарларға бөлетін негізгі сызық қайсы?",
+        type:"single",
+        options:["Бастапқы меридиан","Экватор","Тропик сызығы","Поляр шеңбері","180° меридиан"],
+        answer:[1],
+        exp:"Экватор Жерді Солтүстік және Оңтүстік жарты шарларға бөледі."
+      },
+      {
+        q:"2. Географиялық координатаны анықтайтын көрсеткіштерді белгілеңіз.",
+        type:"multi",
+        options:["Географиялық ендік","Масштаб түрі","Географиялық бойлық","Жер бедері биіктігі","Карта проекциясы","Нысанның шартты белгісі"],
+        answer:[0,2],
+        exp:"Географиялық координата ендік пен бойлық арқылы анықталады."
+      },
+      {
+        q:"3. 1 см — 100 м атаулы масштабына сәйкес сандық масштаб қайсы?",
+        type:"single",
+        options:["1:1 000","1:10 000","1:100 000","1:1 000 000","1:100"],
+        answer:[1],
+        exp:"100 м = 10 000 см, сондықтан масштаб 1:10 000 болады."
+      },
+      {
+        q:"4. Орта масштабты картаға сәйкес аралық қайсы?",
+        type:"single",
+        options:["1:100 000 масштабқа дейін","1:200 000-нан 1:1 000 000-ға дейін","1:1 000 000-нан кіші","1:10 000-нан 1:25 000-ға дейін","Тек 1:50 000 масштаб"],
+        answer:[1],
+        exp:"Орта масштаб 1:200 000-нан 1:1 000 000-ға дейінгі карталарды қамтиды."
+      },
+      {
+        q:"5. Топографиялық карта ұғымына сәйкес тұжырым қайсы?",
+        type:"single",
+        options:[
+          "Дүние жүзінің саяси бөлінісін ғана көрсететін карта",
+          "Жергілікті жерді шартты белгілермен бірнеше есе кішірейтіп дәл бейнелейтін карта",
+          "Тек климаттық белдеулерді бейнелейтін карта",
+          "Тек мұхит ағыстарын көрсететін карта",
+          "Тек материктердің геологиялық жасын көрсететін карта"
+        ],
+        answer:[1],
+        exp:"Топографиялық карта жергілікті жердің шағын ауданын шартты белгілермен дәл көрсетеді."
+      },
+      {
+        q:"6. Дата ауысу сызығы негізінен қай меридиан маңымен өтеді?",
+        type:"single",
+        options:["0° меридиан","30° шығыс бойлық","90° батыс бойлық","180° меридиан","66,5° солтүстік ендік"],
+        answer:[3],
+        exp:"Дата ауысу сызығы негізінен 180° меридиан маңымен өтеді."
+      },
+      {
+        q:"7. Жердің шар тәрізді екенін ескеріп, оның өлшемдерін есептеуге үлес қосқан ежелгі ғалым қайсы?",
+        type:"single",
+        options:["Әл-Фараби","Эратосфен","А.Гумбольдт","Птолемей","Мартин Бехайм"],
+        answer:[1],
+        exp:"Эратосфен Жердің шар тәрізді екенін ескеріп, оның өлшемдерін есептеуге талпынған ғалым ретінде белгілі."
+      },
+      {
+        q:"8. Алғашқы глобусты жасаған ғалым ретінде қай есім беріледі?",
+        type:"single",
+        options:["Мартин Бехайм","Фернан Магеллан","Джеймс Кук","Руаль Амундсен","Христофор Колумб"],
+        answer:[0],
+        exp:"Алғашқы глобусты жасаған ғалым ретінде Мартин Бехайм аталады."
+      },
+      {
+        q:"9. Жер мен Күннің орташа арақашықтығы шамамен қанша?",
+        type:"single",
+        options:["40 млн км","75 млн км","100 млн км","150 млн км","300 млн км"],
+        answer:[3],
+        exp:"Жер мен Күннің арақашықтығы шамамен 150 млн км."
+      },
+      {
+        q:"10. Жер өз білігіне қатысты қандай бұрышпен еңкіш орналасқан?",
+        type:"single",
+        options:["23,5°","45°","66,5°","90°","180°"],
+        answer:[2],
+        exp:"Жер осі орбита жазықтығына қатысты 66,5° бұрышпен еңкіш орналасады."
+      }
+    ]
+  },
+
+  {
+    id:"physical",
+    title:"Физикалық география",
+    short:"Жер қыртысы, атмосфера, ылғалдылық, табиғат зоналары, өзен-көлдер.",
+    level:"B",
+    theory:[
+      "Физикалық география Жердің табиғи қабықтарын, жер бедерін, климатты, өзен-көлдерді, табиғат зоналарын және табиғи кешендерді зерттейді.",
+      "Жер қыртысы, мантия, ядро, атмосфера, гидросфера, биосфера сияқты ұғымдар географиялық қабықты түсінудің негізін құрайды.",
+      "Температура биіктеген сайын төмендейді: 100 м сайын шамамен 0,6°C, 1000 м сайын 6°C."
+    ],
+    facts:[
+      "Ядро құрамында темір мен никель болады.",
+      "Ядро радиусы шамамен 3500 км.",
+      "Температура 1000 м биіктікке көтерілген сайын 6°C төмендейді.",
+      "Ауадағы су буының нақты мөлшері абсолюттік ылғалдық деп аталады.",
+      "Жауын-шашын мен буланушылық қатынасы — ылғалдану коэффициенті.",
+      "Географиялық қабық атмосфера, гидросфера, биосфера және литосфера байланысынан қалыптасады."
+    ],
+    questions:[
+      {
+        q:"1. Жер ядросының негізгі құрамын көрсетіңіз.",
+        type:"single",
+        options:["Кальций мен магний","Темір мен никель","Кремний мен алюминий","Көміртек пен сутек","Натрий мен хлор"],
+        answer:[1],
+        exp:"Жер ядросының негізгі құрамында темір мен никель басым."
+      },
+      {
+        q:"2. Жер ядросының радиусы шамамен қанша?",
+        type:"single",
+        options:["700 км","1500 км","2900 км","3500 км","6371 км"],
+        answer:[3],
+        exp:"Файлдағы мәлімет бойынша ядро радиусы шамамен 3500 км."
+      },
+      {
+        q:"3. Егер тау етегінде ауа температурасы +18°C болса, 5000 м биіктікте температура шамамен қанша болады?",
+        type:"single",
+        options:["0°C","+6°C","-6°C","-12°C","-18°C"],
+        answer:[3],
+        exp:"1000 м сайын 6°C төмендейді: 5×6=30; 18−30=-12°C."
+      },
+      {
+        q:"4. Абсолюттік ылғалдық нені білдіреді?",
+        type:"single",
+        options:[
+          "Ауадағы су буының нақты мөлшерін",
+          "Жауын-шашынның жылдық жиынтығын",
+          "Буланушылық пен жауын-шашын қатынасын",
+          "Ауа қысымының тәуліктік өзгерісін",
+          "Жел жылдамдығының шкаласын"
+        ],
+        answer:[0],
+        exp:"Абсолюттік ылғалдық — 1 м³ ауадағы су буының нақты мөлшері."
+      },
+      {
+        q:"5. Ылғалдану коэффициенті қандай көрсеткіштердің қатынасымен анықталады?",
+        type:"single",
+        options:["Температура мен қысым","Жауын-шашын мен буланушылық","Ендік пен бойлық","Жел мен бұлттылық","Ағыс пен тұздылық"],
+        answer:[1],
+        exp:"Ылғалдану коэффициенті жауын-шашынның буланушылыққа қатынасы арқылы анықталады."
+      },
+      {
+        q:"6. Географиялық қабықты түзетін негізгі қабықтарды белгілеңіз.",
+        type:"multi",
+        options:["Атмосфера","Гидросфера","Биосфера","Литосфера","Ионосфера","Магнитосфера"],
+        answer:[0,1,2,3],
+        exp:"Географиялық қабық атмосфера, гидросфера, биосфера және литосфераның өзара байланысынан түзіледі."
+      },
+      {
+        q:"7. Жер бедерінің өзгеруіне әсер ететін күштер қайсы?",
+        type:"single",
+        options:["Тек күн радиациясы","Тек мұхит ағыстары","Ішкі және сыртқы күштер","Тек атмосфералық қысым","Тек өсімдік жамылғысы"],
+        answer:[2],
+        exp:"Жер бедері эндогендік және экзогендік, яғни ішкі және сыртқы күштердің әсерінен өзгереді."
+      },
+      {
+        q:"8. Судың тереңдігін өлшейтін құрал қайсы?",
+        type:"single",
+        options:["Барометр","Эхолот","Анемометр","Гигрометр","Компас"],
+        answer:[1],
+        exp:"Судың тереңдігін өлшейтін құрал — эхолот."
+      },
+      {
+        q:"9. Ауа қысымын өлшейтін құралды белгілеңіз.",
+        type:"single",
+        options:["Эхолот","Барометр","Термометр","Флюгер","Сейсмограф"],
+        answer:[1],
+        exp:"Ауа қысымын барометр өлшейді."
+      },
+      {
+        q:"10. Экватор мен тропик арасындағы өтпелі климаттық белдеу қайсы?",
+        type:"single",
+        options:["Экваторлық","Субэкваторлық","Тропиктік","Субтропиктік","Қоңыржай"],
+        answer:[1],
+        exp:"Экватор мен тропик арасындағы өтпелі белдеу — субэкваторлық белдеу."
+      }
+    ]
+  },
+
+  {
+    id:"kazakhstan",
+    title:"Қазақстан географиясы",
+    short:"Қазақстан аумағы, қорықтар, өзендер, табиғи аймақтар, өнеркәсіп.",
+    level:"B/C",
+    theory:[
+      "Қазақстан географиясында аумақ, табиғи аймақтар, өзен-көлдер, пайдалы қазбалар, экономикалық аудандар және өнеркәсіп орталықтары маңызды орын алады.",
+      "Қазақстанның жер көлемі 2724,9 мың км². Ел аумағы табиғи-климаттық айырмашылықтарға, ресурстық базаға және экономикалық мамандануға қарай ерекшеленеді.",
+      "Қорықтар мен ұлттық парктер табиғи кешендерді, сирек жануарлар мен өсімдіктерді қорғау үшін құрылады."
+    ],
+    facts:[
+      "Қазақстан жер көлемі — 2724,9 мың км².",
+      "Қазақстан жер көлемі бойынша дүниежүзінде 9-орын алады.",
+      "Сырдария Тұран ойпатын кесіп өтеді.",
+      "Нұра өзені қар суымен қоректенеді.",
+      "Дала зонасында Наурызым және Қорғалжын қорықтары орналасқан.",
+      "Үстірт қорығы қабылан мен құланды қорғаумен байланысты."
+    ],
+    questions:[
+      {
+        q:"1. Қазақстанның жер көлемі бойынша дұрыс көрсеткіш қайсы?",
+        type:"single",
+        options:["1724,9 мың км²","2224,9 мың км²","2724,9 мың км²","3724,9 мың км²","4724,9 мың км²"],
+        answer:[2],
+        exp:"Қазақстанның жер көлемі — 2724,9 мың км²."
+      },
+      {
+        q:"2. Қазақстан жер көлемі жөнінен дүниежүзінде нешінші орын алады?",
+        type:"single",
+        options:["5-орын","6-орын","7-орын","8-орын","9-орын"],
+        answer:[4],
+        exp:"Файлда Қазақстан жер көлемі жөнінен 9-орында деп берілген."
+      },
+      {
+        q:"3. Тұран ойпатын кесіп өтетін өзен қайсы?",
+        type:"single",
+        options:["Ертіс","Сырдария","Жайық","Есіл","Тобыл"],
+        answer:[1],
+        exp:"Сырдария өзені Тұран ойпатын кесіп өтеді."
+      },
+      {
+        q:"4. Нұра өзенінің қоректену типі қайсы?",
+        type:"single",
+        options:["Мұздық","Жаңбыр","Қар","Жерасты суы","Аралас мұхиттық"],
+        answer:[2],
+        exp:"Файлдағы мәлімет бойынша Нұра өзені қар суымен қоректенеді."
+      },
+      {
+        q:"5. Дала зонасында орналасқан қорықтарды белгілеңіз.",
+        type:"multi",
+        options:["Наурызым","Қорғалжын","Ақсу-Жабағылы","Үстірт","Марқакөл","Барсакелмес"],
+        answer:[0,1],
+        exp:"Дала зонасында Наурызым және Қорғалжын қорықтары орналасқан."
+      },
+      {
+        q:"6. Қабылан мен құланды қорғау мақсатымен байланысты қорық қайсы?",
+        type:"single",
+        options:["Наурызым","Үстірт","Марқакөл","Қорғалжын","Батыс Алтай"],
+        answer:[1],
+        exp:"Үстірт қорығы қабылан мен құланды қорғаумен байланысты."
+      },
+      {
+        q:"7. Алтай тауындағы қорықтар жұбы қайсы?",
+        type:"single",
+        options:["Наурызым және Қорғалжын","Марқакөл және Батыс Алтай","Ақсу-Жабағылы және Барсакелмес","Үстірт және Алакөл","Қарқаралы және Алтынемел"],
+        answer:[1],
+        exp:"Алтай тауы аумағындағы қорықтар ретінде Марқакөл және Батыс Алтай беріледі."
+      },
+      {
+        q:"8. Қорқыт ата ескерткіші орналасқан қала қайсы?",
+        type:"single",
+        options:["Түркістан","Қызылорда","Тараз","Ақтөбе","Павлодар"],
+        answer:[1],
+        exp:"Файлда Қорқыт ата ескерткіші Қызылордамен байланысты берілген."
+      },
+      {
+        q:"9. Шайтанкөл орналасқан ұлттық парк қайсы?",
+        type:"single",
+        options:["Қарқаралы","Алтынемел","Іле Алатауы","Баянауыл","Көкшетау"],
+        answer:[0],
+        exp:"Шайтанкөл Қарқаралы ұлттық паркімен байланысты."
+      },
+      {
+        q:"10. Асбест кен орны ретінде қайсы көрсетілген?",
+        type:"single",
+        options:["Жітіқара","Жезқазған","Қоңырат","Бозшакөл","Жаңатас"],
+        answer:[0],
+        exp:"Файлда асбест кен орны ретінде Жітіқара берілген."
+      }
+    ]
+  },
+
+  {
+    id:"world",
+    title:"Дүние жүзі географиясы",
+    short:"Материктер, мұхиттар, бұғаздар, таулар, көлдер, табиғат зоналары.",
+    level:"B/C",
+    theory:[
+      "Дүние жүзі географиясында материктер мен мұхиттар, бұғаздар, таулар, өзендер, көлдер, табиғат зоналары және аймақтық ерекшеліктер қарастырылады.",
+      "Кейбір фактілер КТ сұрақтарында жиі кездеседі: Ла-Манш бұғазы, Сейкан тунелі, Пиай мүйісі, Амазонка сельвасы, Солтүстік Американың Ұлы көлдері.",
+      "Материктік және аймақтық нысандарды шатастырмау үшін әр нысанның орналасуы мен ерекшелігін бірге есте сақтау қажет."
+    ],
+    facts:[
+      "Кеме қатынасы ең көп бұғаздардың бірі — Ла-Манш.",
+      "Хонсю мен Хоккайдо аралдарын Сейкан тунелі байланыстырады.",
+      "Еуразияның оңтүстік шеткі нүктесі — Пиай.",
+      "Оңтүстік Америкадағы қалың экваторлық орман — сельва.",
+      "Солтүстік Американың Солтүстік Мұзды мұхит алабына жататын өзені — Маккензи.",
+      "Дүние жүзіндегі ең үлкен каньон Колорадо өзені бойында орналасқан."
+    ],
+    questions:[
+      {
+        q:"1. Кеме қатынасы ең көп бұғаздардың бірі ретінде қай бұғаз көрсетілген?",
+        type:"single",
+        options:["Ормуз","Ла-Манш","Босфор","Гибралтар","Зонд"],
+        answer:[1],
+        exp:"Файлда тәулігіне көп кеме өтетін бұғаз ретінде Ла-Манш берілген."
+      },
+      {
+        q:"2. Хонсю мен Хоккайдо аралдарын байланыстыратын тунель қайсы?",
+        type:"single",
+        options:["Евротуннель","Сейкан","Готард","Лердаль","Монблан"],
+        answer:[1],
+        exp:"Жапониядағы Хонсю мен Хоккайдоны Сейкан тунелі байланыстырады."
+      },
+      {
+        q:"3. Еуразия материгінің оңтүстік шеткі нүктесі қайсы?",
+        type:"single",
+        options:["Челюскин","Пиай","Рока","Дежнев","Игльный"],
+        answer:[1],
+        exp:"Еуразияның оңтүстік шеткі нүктесі — Пиай."
+      },
+      {
+        q:"4. Оңтүстік Америкадағы ит тұмсығы батпайтын қалың орман қалай аталады?",
+        type:"single",
+        options:["Тайга","Сельва","Кампос","Пампа","Прерия"],
+        answer:[1],
+        exp:"Оңтүстік Америкадағы қалың экваторлық орман — сельва."
+      },
+      {
+        q:"5. Бразилия саваннасы қалай аталады?",
+        type:"single",
+        options:["Пампа","Кампос","Сельва","Льянос","Прерия"],
+        answer:[1],
+        exp:"Бразилия саваннасы — кампос."
+      },
+      {
+        q:"6. Солтүстік Американың Солтүстік Мұзды мұхит алабына жататын өзені қайсы?",
+        type:"single",
+        options:["Миссисипи","Колорадо","Маккензи","Юкон","Ниагара"],
+        answer:[2],
+        exp:"Маккензи өзені Солтүстік Мұзды мұхит алабына жатады."
+      },
+      {
+        q:"7. Солтүстік Американың Ұлы көлдерін белгілеңіз.",
+        type:"multi",
+        options:["Жоғарғы","Мичиган","Гурон","Эри","Онтарио","Виктория"],
+        answer:[0,1,2,3,4],
+        exp:"Ұлы көлдерге Жоғарғы, Мичиган, Гурон, Эри және Онтарио жатады."
+      },
+      {
+        q:"8. Дүние жүзіндегі ең үлкен каньон қай өзен бойында орналасқан?",
+        type:"single",
+        options:["Маккензи","Колорадо","Миссисипи","Амазонка","Ориноко"],
+        answer:[1],
+        exp:"Үлкен каньон Колорадо өзені бойында орналасқан."
+      },
+      {
+        q:"9. Африканың ең биік нүктесі қайсы?",
+        type:"single",
+        options:["Кения","Килиманджаро","Атлас","Рувензори","Тугела"],
+        answer:[1],
+        exp:"Африканың ең биік нүктесі — Килиманджаро."
+      },
+      {
+        q:"10. Африканың көлемі ең үлкен көлі қайсы?",
+        type:"single",
+        options:["Танганьика","Ньяса","Виктория","Чад","Тана"],
+        answer:[2],
+        exp:"Африканың көлемі ең үлкен көлі — Виктория."
+      }
+    ]
+  },
+
+  {
+    id:"economy",
+    title:"Экономикалық география және ресурстар",
+    short:"Өнеркәсіп, отын, пайдалы қазбалар, елдердің мамандануы.",
+    level:"C",
+    theory:[
+      "Экономикалық география елдер мен аймақтардың шаруашылығын, ресурстарын, өнеркәсіп орталықтарын және халықаралық мамандануын зерттейді.",
+      "КТ сұрақтарында көмір, мұнай, газ, металлургия, химия өнеркәсібі, машина жасау, ауыл шаруашылығы және халықаралық ұйымдар жиі кездеседі.",
+      "Елдердің мамандануын есте сақтағанда нақты өнім, қала немесе аймақпен бірге жаттау тиімді."
+    ],
+    facts:[
+      "Норвегия СЭС энергиясын кең пайдаланатын ел ретінде беріледі.",
+      "Дүние жүзіндегі көмір экспорттаушы елдер: Аустралия, Канада, Колумбия, ОАР.",
+      "Мұнай бағасын реттеумен байланысты ұйым — ОПЕК.",
+      "Жан басына шаққанда мұнай өндіруден алдыңғы ел ретінде Кувейт берілген.",
+      "Кореяның негізгі маманданған салаларының бірі — кеме жасау.",
+      "АҚШ-тың мұнай-химия астанасы — Хьюстон."
+    ],
+    questions:[
+      {
+        q:"1. СЭС энергиясын кең пайдаланатын ел ретінде қайсы көрсетілген?",
+        type:"single",
+        options:["Норвегия","Италия","Египет","Кувейт","Бразилия"],
+        answer:[0],
+        exp:"Файлда энергияға СЭС пайдаланатын ел ретінде Норвегия берілген."
+      },
+      {
+        q:"2. Дүние жүзіндегі көмір экспорттаушы елдерді белгілеңіз.",
+        type:"multi",
+        options:["Аустралия","Канада","Колумбия","ОАР","Италия","Испания"],
+        answer:[0,1,2,3],
+        exp:"Көмір экспорттаушы елдер ретінде Аустралия, Канада, Колумбия және ОАР берілген."
+      },
+      {
+        q:"3. Мұнай бағасын реттеумен байланысты халықаралық ұйым қайсы?",
+        type:"single",
+        options:["БҰҰ","ЮНЕСКО","ОПЕК","ЕО","ТМД"],
+        answer:[2],
+        exp:"Мұнай бағасы мен мұнай экспорттаушы елдер ұйымы ОПЕК-пен байланысты."
+      },
+      {
+        q:"4. Жан басына шаққанда мұнай өндіруден алдыңғы ел ретінде қай ел көрсетілген?",
+        type:"single",
+        options:["Сауд Арабиясы","Кувейт","Канада","Ресей","Иран"],
+        answer:[1],
+        exp:"Файлда жан басына шаққанда мұнай өндіруден Кувейт алдыңғы ел ретінде берілген."
+      },
+      {
+        q:"5. Кореяның негізгі маманданған саласы қайсы?",
+        type:"single",
+        options:["Кеме жасау","Мақта шаруашылығы","Құрма экспорты","Фосфорит өндіру","Жүн өндірісі"],
+        answer:[0],
+        exp:"Кореяның негізгі маманданған саласы ретінде кеме жасау көрсетілген."
+      },
+      {
+        q:"6. АҚШ-тың мұнай-химия астанасы қай қала?",
+        type:"single",
+        options:["Детройт","Лос-Анджелес","Хьюстон","Чикаго","Сиэтл"],
+        answer:[2],
+        exp:"АҚШ-тың мұнай-химия астанасы — Хьюстон."
+      },
+      {
+        q:"7. АҚШ-тың «автокөліктер астанасы» қай қала?",
+        type:"single",
+        options:["Детройт","Нью-Йорк","Бостон","Сан-Франциско","Атланта"],
+        answer:[0],
+        exp:"Детройт АҚШ-тың автокөлік өнеркәсібімен байланысты."
+      },
+      {
+        q:"8. АҚШ-тың жеміс-жидек себеті ретінде қай аймақ берілген?",
+        type:"single",
+        options:["Техас","Калифорния","Аляска","Флорида","Мичиган"],
+        answer:[1],
+        exp:"Калифорния АҚШ-тың жеміс-жидек себеті ретінде беріледі."
+      },
+      {
+        q:"9. Украинадағы кеме жасау орталықтарын белгілеңіз.",
+        type:"multi",
+        options:["Херсон","Керчь","Николаев","Киев","Харьков","Львов"],
+        answer:[0,1,2],
+        exp:"Файлда Украина кеме жасау орталықтары ретінде Херсон, Керчь, Николаев берілген."
+      },
+      {
+        q:"10. Сағат өндірісіне қажетті дәл станок жасауға маманданған ел қайсы?",
+        type:"single",
+        options:["Швейцария","Италия","Франция","Канада","Норвегия"],
+        answer:[0],
+        exp:"Дәл станок жасау және сағат өндірісімен Швейцария байланыстырылады."
+      }
+    ]
+  },
+
+  {
+    id:"explorers",
+    title:"Саяхатшылар, ашылулар және елдер",
+    short:"Магеллан, Колумб, Кук, Амундсен, Скотт, ел астаналары және ұйымдар.",
+    level:"B/C",
+    theory:[
+      "Бұл бөлімде географиялық ашылулар, саяхатшылар, халықаралық ұйымдар, елдердің астаналары және тарихи-географиялық фактілер қарастырылады.",
+      "КТ сұрақтарында жылдар мен есімдерді шатастырмау маңызды: Колумб — 1492, Магеллан экспедициясы — 1519–1522, БҰҰ — 1945, Қазақстан БҰҰ-ға 1992 жылы кірді.",
+      "Поляр зерттеушілер бойынша Амундсен мен Скотт, ал Австралия және Жаңа Зеландия бойынша Джеймс Кук жиі сұралады."
+    ],
+    facts:[
+      "Христофор Колумб саяхаты — 1492 жыл.",
+      "Ф.Магеллан экспедициясы жер шарын 1519–1522 жылдары айналып өтті.",
+      "Оңтүстік полюске Норвегия экспедициясын Р.Амундсен басқарды.",
+      "Оңтүстік полюске ағылшын экспедициясын Р.Скотт басқарды.",
+      "БҰҰ 1945 жылы құрылды.",
+      "Қазақстан БҰҰ-на 1992 жылы 2 наурызда кірді."
+    ],
+    questions:[
+      {
+        q:"1. Христофор Колумбтың Америкаға байланысты әйгілі саяхаты қай жылы басталды?",
+        type:"single",
+        options:["1415","1492","1519","1522","1607"],
+        answer:[1],
+        exp:"Колумбтың саяхаты 1492 жылмен байланысты."
+      },
+      {
+        q:"2. Ф.Магеллан экспедициясының жер шарын айналып шығу жылдары қайсы?",
+        type:"single",
+        options:["1492–1498","1519–1522","1600–1603","1728–1730","1911–1912"],
+        answer:[1],
+        exp:"Магеллан экспедициясы 1519–1522 жылдары жер шарын айналып өтті."
+      },
+      {
+        q:"3. Магеллан қайтыс болған соң экспедицияны кім басқарды?",
+        type:"single",
+        options:["Себастьян Элькано","Джеймс Кук","Роберт Скотт","Руаль Амундсен","Джон Кабот"],
+        answer:[0],
+        exp:"Файлда Магелланнан кейін экспедицияны Себастьян Элькано басқарғаны берілген."
+      },
+      {
+        q:"4. Оңтүстік полюске Норвегия экспедициясын басқарған зерттеуші қайсы?",
+        type:"single",
+        options:["Роберт Скотт","Руаль Амундсен","Джеймс Кук","Фернан Магеллан","А.Гумбольдт"],
+        answer:[1],
+        exp:"Оңтүстік полюске Норвегия экспедициясын Руаль Амундсен басқарды."
+      },
+      {
+        q:"5. Оңтүстік полюске ағылшын экспедициясын басқарған зерттеуші қайсы?",
+        type:"single",
+        options:["Роберт Скотт","Руаль Амундсен","Джон Кабот","Христофор Колумб","Пржевальский"],
+        answer:[0],
+        exp:"Ағылшын экспедициясын Роберт Скотт басқарды."
+      },
+      {
+        q:"6. БҰҰ құрылған жыл қайсы?",
+        type:"single",
+        options:["1919","1939","1945","1957","1992"],
+        answer:[2],
+        exp:"БҰҰ 1945 жылы құрылды."
+      },
+      {
+        q:"7. Қазақстан БҰҰ-на қай жылы мүше болды?",
+        type:"single",
+        options:["1986","1991","1992","1995","1997"],
+        answer:[2],
+        exp:"Қазақстан БҰҰ-на 1992 жылы 2 наурызда кірді."
+      },
+      {
+        q:"8. Испанияның астанасы қай қала?",
+        type:"single",
+        options:["Барселона","Мадрид","Севилья","Валенсия","Лиссабон"],
+        answer:[1],
+        exp:"Испания астанасы — Мадрид."
+      },
+      {
+        q:"9. Компасты алғаш ойлап тапқан ел ретінде қайсы көрсетіледі?",
+        type:"single",
+        options:["Қытай","Үндістан","Грекия","Португалия","Италия"],
+        answer:[0],
+        exp:"Магнитті компасты Қытай ойлап тапқан деп беріледі."
+      },
+      {
+        q:"10. 2011 жылы картаға енген мемлекет қайсы?",
+        type:"single",
+        options:["Косово","Оңтүстік Судан","Шығыс Тимор","Черногория","Эритрея"],
+        answer:[1],
+        exp:"2011 жылы картаға енген мемлекет — Оңтүстік Судан."
+      }
+    ]
+  }
+];
+
+const finalQuestions = [
+  ...sections.flatMap(s => s.questions.slice(0,5))
+].slice(0,30);
+
+const nav = document.getElementById("nav");
+const cards = document.getElementById("cards");
+const pages = document.getElementById("pages");
+
+function makeBtn(text,id){
+  const b=document.createElement("button");
+  b.textContent=text;
+  b.onclick=()=>openPage(id);
+  return b;
+}
+
+nav.appendChild(makeBtn("Басты бет","home"));
+sections.forEach((s,i)=>nav.appendChild(makeBtn((i+1)+"-бөлім",s.id)));
+nav.appendChild(makeBtn("Финал тест","final"));
+
+function openPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  const el=document.getElementById(id);
+  if(el){el.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+}
+
+function letters(i){return ["A","B","C","D","E","F"][i];}
+function answerText(q){return q.answer.map(i=>letters(i)).join(", ");}
+
+function renderQuestions(qs,prefix){
+  return `
+    <div class="test-box">
+      ${qs.map((q,idx)=>`
+        <div class="question" data-answer="${q.answer.join(",")}" data-type="${q.type}">
+          <h4>${idx+1}. ${q.q.replace(/^\d+\.\s*/,"")}</h4>
+          <div class="options">
+            ${q.options.map((op,i)=>`
+              <label class="option">
+                <input type="${q.type==="multi" ? "checkbox" : "radio"}" name="${prefix}q${idx}" value="${i}">
+                <span>${letters(i)}) ${op}</span>
+              </label>
+            `).join("")}
+          </div>
+          <div class="explain">Дұрыс жауап: <b>${answerText(q)}</b>. ${q.exp}</div>
+        </div>
+      `).join("")}
+      <div class="actions">
+        <button class="check" onclick="checkTest(this)">Жауаптарды тексеру</button>
+        <button class="reset" onclick="resetTest(this)">Қайта бастау</button>
+      </div>
+    </div>
+  `;
+}
+
+sections.forEach((s,i)=>{
+  const card=document.createElement("article");
+  card.className="card";
+  card.onclick=()=>openPage(s.id);
+  card.innerHTML=`
+    <div>
+      <div class="num">${i+1}</div>
+      <h3>${s.title}</h3>
+      <p>${s.short}</p>
+    </div>
+    <div class="tags">
+      <span class="tag">География</span>
+      <span class="tag">${s.level} деңгей</span>
+      <span class="tag">10 сұрақ</span>
+    </div>
+  `;
+  cards.appendChild(card);
+
+  const page=document.createElement("section");
+  page.className="page";
+  page.id=s.id;
+  page.innerHTML=`
+    <div class="topic-hero">
+      <div class="breadcrumb">
+        <button class="back" onclick="openPage('home')">← Басты бет</button>
+        <span>${i+1}-бөлім</span>
+      </div>
+      <h2>${s.title}</h2>
+      <p>${s.short}</p>
+      <div class="info">
+        <div><b>Сұрақ саны</b><span>10 тапсырма</span></div>
+        <div><b>Деңгей</b><span>${s.level}</span></div>
+        <div><b>Формат</b><span>1 немесе бірнеше жауап</span></div>
+        <div><b>Тексеру</b><span>Автоматты нәтиже</span></div>
+      </div>
+    </div>
+
+    <div class="theory">
+      <div class="box">
+        <h3>Қысқаша теория</h3>
+        ${s.theory.map(p=>`<p>${p}</p>`).join("")}
+      </div>
+      <div class="box">
+        <h3>Есте сақтаңыз</h3>
+        <ul>${s.facts.map(f=>`<li>${f}</li>`).join("")}</ul>
+      </div>
+    </div>
+
+    <div class="content">
+      <h3>Тест тапсырмалары</h3>
+      ${renderQuestions(s.questions,s.id)}
+    </div>
+  `;
+  pages.appendChild(page);
+});
+
+const finalPage=document.createElement("section");
+finalPage.className="page";
+finalPage.id="final";
+finalPage.innerHTML=`
+  <div class="topic-hero">
+    <div class="breadcrumb">
+      <button class="back" onclick="openPage('home')">← Басты бет</button>
+      <span>Қорытынды тест</span>
+    </div>
+    <h2>Финалдық КТ тест</h2>
+    <p>Барлық бөлім бойынша аралас қорытынды тест. Сұрақтар картография, физикалық география, Қазақстан, дүниежүзі географиясы, экономикалық география және саяхатшылар тақырыптарынан алынды.</p>
+    <div class="info">
+      <div><b>Сұрақ саны</b><span>30 тапсырма</span></div>
+      <div><b>Формат</b><span>Аралас тест</span></div>
+      <div><b>Жауап түрі</b><span>1 немесе бірнеше дұрыс</span></div>
+      <div><b>Мақсат</b><span>Қорытынды қайталау</span></div>
+    </div>
+  </div>
+  <div class="content">
+    <h3>Қорытынды тест тапсырмалары</h3>
+    ${renderQuestions(finalQuestions,"final")}
+  </div>
+`;
+pages.appendChild(finalPage);
+
+function norm(arr){
+  return arr.map(String).sort((a,b)=>Number(a)-Number(b)).join(",");
+}
+
+function checkTest(btn){
+  const box=btn.closest(".test-box");
+  const questions=box.querySelectorAll(".question");
+  let correct=0, answered=0;
+
+  questions.forEach(q=>{
+    const answer=norm(q.dataset.answer.split(","));
+    const checked=[...q.querySelectorAll("input:checked")].map(i=>i.value);
+    const selected=norm(checked);
+    const options=q.querySelectorAll(".option");
+    const explain=q.querySelector(".explain");
+
+    options.forEach(o=>{
+      o.style.borderColor="var(--border)";
+      o.style.background="#f8fafc";
+    });
+
+    if(checked.length) answered++;
+
+    if(checked.length && selected===answer){
+      correct++;
+      checked.forEach(v=>{
+        const inp=q.querySelector(`input[value="${v}"]`);
+        inp.closest(".option").style.borderColor="rgba(22,163,74,.65)";
+        inp.closest(".option").style.background="rgba(22,163,74,.08)";
+      });
+    } else {
+      checked.forEach(v=>{
+        const inp=q.querySelector(`input[value="${v}"]`);
+        inp.closest(".option").style.borderColor="rgba(220,38,38,.65)";
+        inp.closest(".option").style.background="rgba(220,38,38,.08)";
+      });
+      q.dataset.answer.split(",").forEach(v=>{
+        const inp=q.querySelector(`input[value="${v}"]`);
+        if(inp){
+          inp.closest(".option").style.borderColor="rgba(22,163,74,.65)";
+          inp.closest(".option").style.background="rgba(22,163,74,.08)";
+        }
+      });
+    }
+    explain.style.display="block";
+  });
+
+  const old=box.querySelector(".summary");
+  if(old) old.remove();
+
+  const summary=document.createElement("div");
+  summary.className="summary";
+  const percent=Math.round((correct/questions.length)*100);
+  summary.innerHTML=`Нәтиже: ${correct} / ${questions.length} дұрыс жауап. Белгіленген сұрақтар: ${answered} / ${questions.length}. Пайыз: ${percent}%.`;
+  btn.parentElement.insertAdjacentElement("afterend",summary);
+}
+
+function resetTest(btn){
+  const box=btn.closest(".test-box");
+  box.querySelectorAll("input").forEach(i=>i.checked=false);
+  box.querySelectorAll(".option").forEach(o=>{
+    o.style.borderColor="var(--border)";
+    o.style.background="#f8fafc";
+  });
+  box.querySelectorAll(".explain").forEach(e=>e.style.display="none");
+  const old=box.querySelector(".summary");
+  if(old) old.remove();
+}
+</script>
+</body>
+</html>
